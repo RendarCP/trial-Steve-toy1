@@ -9,9 +9,13 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.3.4",
+    "history": "^4.9.0",
     "meteor-node-stubs": "^0.4.1",
     "react": "^16.5.0",
-    "react-dom": "^16.5.0"
+    "react-dom": "^16.5.0",
+    "react-router": "^5.0.1",
+    "react-router-dom": "^5.0.1",
+    "semantic-ui-react": "^0.87.2"
   },
   "meteor": {
     "mainModule": {
@@ -19,5 +23,10 @@
       "server": "server/main.js"
     },
     "testModule": "tests/main.js"
+  },
+  "devDependencies": {
+    "@craco/craco": "^5.2.3",
+    "craco-less": "^1.9.0",
+    "semantic-ui-less": "^2.4.1"
   }
 }

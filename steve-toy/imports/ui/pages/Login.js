@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 
-class ChatForm extends Component {
+class Login extends Component {
     render() {
         return (
             <div>
-                채팅이 들어갈 영역
+                <h1>로그인 화면입니다</h1>
             </div>
         );
     }
 }
 
-export default ChatForm;
+export default Login;

@@ -20,7 +20,7 @@ Meteor.methods({
     'tasks.insert' (text) {
         check(text, String);
 
-        if( ! this.userId){
+        if( !this.userId){
             throw new Meteor.Error('not-auhorized');
         }
         Tasks.insert({
@@ -35,7 +35,6 @@ Meteor.methods({
          const task = Tasks.findOne(taskId);
         // Tasks.remove(taskId);
         if(task.private && task.owner !== this.userId){
-            console.log("인증되지않았습니다.");
             throw new Meteor.Error('not-Authorized');
         }
         Tasks.remove(taskId);
