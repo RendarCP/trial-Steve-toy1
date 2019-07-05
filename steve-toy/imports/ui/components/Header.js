@@ -8,6 +8,9 @@ class Header extends Component {
                 {/* <button>Blog Write</button>
                 <button>Favorite</button>
                 <label>toy project</label> */}
+                <label>
+                    <Link to="/">Steve Toy Project</Link>
+                </label>
                 <Link to="/login">LOG IN</Link>  
                 <Link to="/signup">SIGN UP</Link>
             </div>
