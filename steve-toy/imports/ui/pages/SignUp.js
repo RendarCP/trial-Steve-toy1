@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Form } from 'semantic-ui-react';
+import { Button, Form, Icon } from 'semantic-ui-react';
 import {Link} from 'react-router-dom';
 import { Accounts } from 'meteor/accounts-base';
 import { createContainer } from 'meteor/react-meteor-data';
@@ -11,15 +11,15 @@ class SignUp extends Component {
         passwordCheck:'',
         PhoneNumber:'',
     }
-    checkPassword(){
-        if(!this.state.password || this.state.password != this.state.passwordCheck){
-            console.error("비밀번호 다름");
+    // checkPassword(){
+    //     if(!this.state.password || this.state.password != this.state.passwordCheck){
+    //         console.error("비밀번호 다름");
             
-        }
-        else{
+    //     }
+    //     else{
 
-        }
-    }
+    //     }
+    // }
     handleChage=(e) =>{
         this.setState({
             [e.target.name]: e.target.value,
@@ -58,15 +58,17 @@ class SignUp extends Component {
         const userName = this.state.userName;
         Accounts.createUser({
             email,
-            password,
             userName,
+            password
         }, (err)=>{
             if(err){
                 this.setState({
                     error:{none:err.reason},
                 });
             }
-            this.props.history.push('/login');
+            else{
+                this.props.history.push('/login');
+            }
         });
     }
     render() {

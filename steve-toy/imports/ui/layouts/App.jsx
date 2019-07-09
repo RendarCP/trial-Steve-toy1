@@ -6,20 +6,17 @@ import { BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 // import login from '../pages/Login';
 // import signup from '../pages/SignUp';
 import {login , signup, Home} from '../pages/index.js';
+import PostWrite from '../pages/PostWrite.js';
 
 const App = () => (
   <div>
-    {/* <div>
-      <Headers/>
-      <Chatform/>
-      <Postlist/>
-    </div> */}
     <div>
     <Router>
       <Headers/>
       {/* <Chatform/>
       <Postlist/> */}
             <Switch>
+              <Route path="/postwrite" component={PostWrite}/>
               <Route exact path="/" component={Home}/>
               <Route path="/login" component={login}/>
               <Route path="/signup" component={signup}/>
