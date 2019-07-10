@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import ChatForm from '../components/ChatForm';
-import PostList from '../components/PostList';
+import ChatForm from './ChatForm';
+import PostList from './PostList';
 
 class Home extends Component {
     render() {

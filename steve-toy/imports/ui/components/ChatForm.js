@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Input,List, Image,Button,Form, TextArea } from 'semantic-ui-react'
+import { Input,List, Image,Button,Form, TextArea,Grid } from 'semantic-ui-react'
 
 class ChatForm extends Component {
     render() {

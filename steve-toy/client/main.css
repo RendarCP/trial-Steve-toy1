@@ -51,3 +51,6 @@ label{
 .Post{
   border:2px solid orange;
 }
+label{
+  text-align: center;
+}

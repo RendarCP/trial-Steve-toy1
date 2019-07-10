@@ -56,10 +56,15 @@ class SignUp extends Component {
         const email = this.state.email;
         const password = this.state.password;
         const userName = this.state.userName;
+        const phoneNumber = this.state.PhoneNumber;
         Accounts.createUser({
             email,
-            userName,
-            password
+            password,
+            profile:{
+                userName,
+                phoneNumber,
+            }
+
         }, (err)=>{
             if(err){
                 this.setState({
@@ -91,14 +96,14 @@ class SignUp extends Component {
                     </Form.Field>
                     <Form.Field>
                         <label>Password</label>
-                        <input placeholder='Name'
+                        <input placeholder='Password'
                          //onChange={e=>this.handleOnPasswordInput(e.target.value)} />
                          type="password"
                          onChange={this.handleOnPasswordInput}/>
                     </Form.Field>
                     <Form.Field>
                         <label>Password Confirm</label>
-                        <input placeholder='Name'
+                        <input placeholder='Password Confirm'
                             type="password"
                          //onChange={e=>this.handleOnCofirmPasswordInput(e.target.value)} />
                          onChange={this.handleOnCofirmPasswordInput}/>
@@ -106,14 +111,13 @@ class SignUp extends Component {
                     </Form.Field>
                     <Form.Field>
                         <label>Phone Number</label>
-                        <input placeholder='Name'
+                        <input placeholder='Phone'
                          name="PhoneNumber" 
                          onChange={this.handleChage}/>
                     </Form.Field>
                     <Button basic><Link to="/">Cancel</Link></Button>
                     <Button primary type='submit'>Ok</Button>
                 </Form>
-                <div>이메일:{this.state.email} userName:{this.state.userName} 패스워드:{this.state.password} check:{this.state.passwordCheck} 폰:{this.state.PhoneNumber}</div>
             </div>
         );
     }

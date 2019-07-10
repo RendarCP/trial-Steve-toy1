@@ -37,9 +37,9 @@ class Login extends Component {
     }
     render() {
         return (
-            <div>
+            <div className="login">
                 <div>
-                    <label>Log In</label>
+                    <h1>Log In</h1>
                 </div>
                 <Form onSubmit={this.onSubmit}>
                     <Form.Field>

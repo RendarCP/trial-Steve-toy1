@@ -13,13 +13,13 @@ class Header extends Component {
                 <div className="Nav">
                     <Menu secondary color='teal'>
                         <Menu.Menu position='left'>
-                        <Link to="/postWrite"><Button basic>Blog Write</Button></Link>
-                            <Button basic>Favorite</Button>
+                        <Link to="/postWrite"><Button>Blog Write</Button></Link>
+                            <Button>Favorite</Button>
                         </Menu.Menu>
                         <Link to="/" className="mainButton">Steve Toy Project</Link>
                         <Menu.Menu position='right'>
-                        <Link to="/login"><Button basic className="loginButton">LOG IN</Button></Link>
-                        <Link to="/signup"><Button basic className="signUpButton">SIGN UP</Button></Link>
+                        <Link to="/login"><Button className="loginButton">LOG IN</Button></Link>
+                        <Link to="/signup"><Button className="signUpButton">SIGN UP</Button></Link>
                         </Menu.Menu>
                     </Menu>
                 </div>

@@ -1,11 +1,12 @@
 import React from 'react';
 import Headers from '../components/Header.js';
-import Postlist from '../components/PostList.js';
-import Chatform from '../components/ChatForm.js';
+// import Postlist from '../components/PostList.js';
+// import Chatform from '../components/ChatForm.js';
 import { BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 // import login from '../pages/Login';
 // import signup from '../pages/SignUp';
-import {login , signup, Home} from '../pages/index.js';
+import {login , signup} from '../pages/index.js';
+import Home from '../components/Home.js';
 import PostWrite from '../pages/PostWrite.js';
 
 const App = () => (
