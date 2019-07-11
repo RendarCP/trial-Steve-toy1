@@ -1,5 +1,9 @@
 import React, { Component } from 'react';
-import { Input,Grid,Image, Segment } from 'semantic-ui-react'
+import { Input,Grid,Image, Segment } from 'semantic-ui-react';
+import postList from '../pages/PostList.js';
+import { withTracker } from 'meteor/react-meteor-data';
+import {Post} from '../../api/post.js';
+import { Meteor } from 'meteor/meteor';
 
 class PostList extends Component {
     render() {
@@ -38,4 +42,4 @@ class PostList extends Component {
     }
 }
 
-export default PostList;
+export default PostList

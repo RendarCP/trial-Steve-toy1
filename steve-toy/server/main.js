@@ -1,5 +1,6 @@
 import { Accounts } from "meteor/accounts-base";
-import '../imports/ui/pages/SignUp.js'
+//import '../imports/ui/pages/SignUp.js'
+import '../imports/api/post.js';
 
 // import { Meteor } from 'meteor/meteor';
 // import Links from '/imports/api/links';
@@ -32,10 +33,10 @@ import '../imports/ui/pages/SignUp.js'
 //     );
 //   }
 // });
-Accounts.onCreateUser(function(options,user){
-  user.profile = {
-    UserName: options.profile.userName,
-    PhoneNumber: options.profile.phoneNumber
-  }
-  return user;
-})
+// Accounts.onCreateUser(function(options,user){
+//   user.profile = {
+//     UserName: options.profile.userName,
+//     PhoneNumber: options.profile.phoneNumber
+//   }
+//   return user;
+// })

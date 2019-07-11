@@ -5,9 +5,10 @@ import Headers from '../components/Header.js';
 import { BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 // import login from '../pages/Login';
 // import signup from '../pages/SignUp';
-import {login , signup} from '../pages/index.js';
+import {login , signup,postwrite} from '../pages/index.js';
 import Home from '../components/Home.js';
-import PostWrite from '../pages/PostWrite.js';
+import { Posts } from '../../api/post.js';
+import { withTracker } from 'meteor/react-meteor-data';
 
 const App = () => (
   <div>
@@ -17,7 +18,7 @@ const App = () => (
       {/* <Chatform/>
       <Postlist/> */}
             <Switch>
-              <Route path="/postwrite" component={PostWrite}/>
+              <Route path="/postwrite" component={postwrite}/>
               <Route exact path="/" component={Home}/>
               <Route path="/login" component={login}/>
               <Route path="/signup" component={signup}/>

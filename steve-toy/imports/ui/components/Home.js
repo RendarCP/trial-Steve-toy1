@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import ChatForm from './ChatForm';
-import PostList from './PostList';
+import PostList from './PostListcomp';
+import List from '../pages/PostList';
 
 class Home extends Component {
     render() {
@@ -8,6 +9,7 @@ class Home extends Component {
             <div>
                 <ChatForm/>
                 <PostList/>
+                <List/>
             </div>
         );
     }

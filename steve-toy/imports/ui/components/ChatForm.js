@@ -76,7 +76,7 @@ class ChatForm extends Component {
                 </div>
                 <div className="Chat">
                      <Form>
-                        <Form.Field label='An HTML <textarea>' control='textarea' rows='3' />
+                        <Form.Field label="채팅방" control='textarea' rows='3' />
                     </Form>
                 </div>
             </div>
