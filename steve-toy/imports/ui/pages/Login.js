@@ -28,7 +28,7 @@ class Login extends Component {
                 this.setState({
                     error:{none:err.reason},
                 });
-                alert("아이디와 비밀번호를 확인해주세요");
+                 alert("아이디와 비밀번호를 확인해주세요");
             }
             else{
                 this.props.history.push('/');

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Form, Icon } from 'semantic-ui-react';
+import { Button, Form, Icon,TextArea } from 'semantic-ui-react';
 import {Link} from 'react-router-dom';
 import { createContainer } from 'meteor/react-meteor-data';
 import { Meteor } from 'meteor/meteor';

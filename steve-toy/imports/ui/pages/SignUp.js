@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Form, Icon } from 'semantic-ui-react';
+import { Button, Form, Icon ,Message} from 'semantic-ui-react';
 import {Link} from 'react-router-dom';
 import { Accounts } from 'meteor/accounts-base';
 import { createContainer } from 'meteor/react-meteor-data';
@@ -47,7 +47,7 @@ class SignUp extends Component {
         //if(passwordCheck){
             if(!this.passwordMatch()){
                 return(
-                    <div>패스워드가 일치하지 않습니다</div>
+                    <div className="modal">패스워드가 일치하지 않습니다</div>
                 )
             }
     }
@@ -55,13 +55,13 @@ class SignUp extends Component {
         e.preventDefault();
         const email = this.state.email;
         const password = this.state.password;
-        const userName = this.state.userName;
+        const username = this.state.userName;
         const phoneNumber = this.state.PhoneNumber;
         Accounts.createUser({
             email,
             password,
+            username,
             profile:{
-                userName,
                 phoneNumber,
             }
 

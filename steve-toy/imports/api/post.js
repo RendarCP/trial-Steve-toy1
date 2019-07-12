@@ -14,6 +14,17 @@ if(Meteor.isServer) {
 //     })
 // }
 
+// const setSchema =Posts.schema = new SimpleSchema({
+//     title:{type:String},
+//     description:{type:String},
+//     content:{type:String},
+//     createdAt:{type:String},
+//     owner:{type:String},
+//     username:{type:String}
+// })
+
+// Posts.attachSchema((setSchema));
+
 Meteor.methods({
     'post.insert' (title,description,content){
         if(!this.userId){
@@ -25,7 +36,7 @@ Meteor.methods({
             content,
             createdAt: new Date(),
             owner: this.userId,
-            username:Meteor.users.findOne(this.userId).profile.UserName,
+            username:Meteor.users.findOne(this.userId).username,
         });
     }
 })

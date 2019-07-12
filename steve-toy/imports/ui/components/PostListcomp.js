@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { Input,Grid,Image, Segment } from 'semantic-ui-react';
-import postList from '../pages/PostList.js';
+import { Input,Grid,Image, Segment,Container,Header } from 'semantic-ui-react';
+import postList from '../pages/PostList.js/index.js.js';
 import { withTracker } from 'meteor/react-meteor-data';
 import {Post} from '../../api/post.js';
 import { Meteor } from 'meteor/meteor';

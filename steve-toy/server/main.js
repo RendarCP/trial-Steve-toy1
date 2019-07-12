@@ -1,7 +1,6 @@
 import { Accounts } from "meteor/accounts-base";
 //import '../imports/ui/pages/SignUp.js'
 import '../imports/api/post.js';
-
 // import { Meteor } from 'meteor/meteor';
 // import Links from '/imports/api/links';
 

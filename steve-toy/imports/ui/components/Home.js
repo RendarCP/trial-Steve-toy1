@@ -1,15 +1,16 @@
 import React, { Component } from 'react';
 import ChatForm from './ChatForm';
-import PostList from './PostListcomp';
 import List from '../pages/PostList';
+import PostDetail from '../pages/PostDetail.js';
 
 class Home extends Component {
     render() {
         return (
             <div>
                 <ChatForm/>
-                <PostList/>
                 <List/>
+                {/* <PostDetail/> */}
+                
             </div>
         );
     }
