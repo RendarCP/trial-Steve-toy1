@@ -36,7 +36,22 @@ Meteor.methods({
             content,
             createdAt: new Date(),
             owner: this.userId,
-            username:Meteor.users.findOne(this.userId).username,
+            username:Meteor.users.findOne(this.userId).profile.userName,
         });
+    },
+    'post.update' (postId,title,description,content){
+        const posts  = Posts.findOne(postId);
+        if(posts.owner !== this.userId){
+            throw new Meteor.Error('non-Authorized');
+        }
+        Posts.update(postId,{$set:{title: title, description:description,content:content}})
+    },
+    'post.favorite' (postId,favorite){
+        const posts = Posts.findOne(postId);
+        // if(posts.owner !== this.userId){
+        //     throw new Meteor.Error('non-Authorized');
+        // }
+        // Posts.update(postId,{$set:{favorite:[$push:{like:favorite}]}})
+        Posts.update(postId,{$push:{favorite:favorite}})
     }
 })

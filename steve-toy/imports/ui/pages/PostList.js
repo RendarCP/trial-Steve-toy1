@@ -3,16 +3,34 @@ import { withTracker } from 'meteor/react-meteor-data';
 import Posts from '../../api/post.js';
 import { Meteor } from 'meteor/meteor';
 import { Input,Grid,Image, Segment,Button,Container,Header } from 'semantic-ui-react';
+import {Link} from 'react-router-dom';
 
 class PostList extends Component {
     renderPost(){
-        return this.props.posts.map((post)=>{
-            return <Grid.Column key={post._id} className="PostList">
-            <Container text style={{ marginTop: '2em' }}>
-                <Header as='h1'>{post.title}</Header>
-                    <p>{post.description}</p>
-            </Container>
-        </Grid.Column>  
+        //console.log(idtest);
+        return this.props.posts.map((posts)=>{
+            if(Meteor.userId()){
+                return <Grid.Column key={posts._id} className="PostList">
+                <Link to={`/post/${posts._id}`}><Container text style={{ marginTop: '2em' }}>
+                    <Header as='h1'>{posts.title}</Header>
+                        <p>{posts.description}</p>
+                </Container></Link>
+            </Grid.Column>  
+            }
+            else{
+                return <Grid.Column key={posts._id} className="PostList">
+                <Container text style={{ marginTop: '2em' }}>
+                    <Header as='h1'>{posts.title}</Header>
+                        <p>{posts.description}</p>
+                </Container>
+            </Grid.Column>  
+            }
+        //     return <Grid.Column key={posts._id} className="PostList">
+        //     <Link to={`/post/${posts._id}`}><Container text style={{ marginTop: '2em' }}>
+        //         <Header as='h1'>{posts.title}</Header>
+        //             <p>{posts.description}</p>
+        //     </Container></Link>
+        // </Grid.Column>  
         })
     }
     

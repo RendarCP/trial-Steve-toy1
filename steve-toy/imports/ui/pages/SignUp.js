@@ -55,13 +55,13 @@ class SignUp extends Component {
         e.preventDefault();
         const email = this.state.email;
         const password = this.state.password;
-        const username = this.state.userName;
+        const userName = this.state.userName;
         const phoneNumber = this.state.PhoneNumber;
         Accounts.createUser({
             email,
             password,
-            username,
             profile:{
+                userName,
                 phoneNumber,
             }
 
@@ -115,8 +115,12 @@ class SignUp extends Component {
                          name="PhoneNumber" 
                          onChange={this.handleChage}/>
                     </Form.Field>
-                    <Button basic><Link to="/">Cancel</Link></Button>
-                    <Button primary type='submit'>Ok</Button>
+                    <div className="buttonposition">
+                        <Button basic><Link to="/">Cancel</Link></Button>
+                        <Button primary type='submit'>Ok</Button>
+                    </div>
+                    {/* <Button basic><Link to="/">Cancel</Link></Button>
+                    <Button primary type='submit'>Ok</Button> */}
                 </Form>
             </div>
         );

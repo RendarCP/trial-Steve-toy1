@@ -3,13 +3,16 @@ import { Button, Form, Icon,TextArea } from 'semantic-ui-react';
 import {Link} from 'react-router-dom';
 import { createContainer } from 'meteor/react-meteor-data';
 import { Meteor } from 'meteor/meteor';
-import { Posts } from '../../api/post.js';
+// import { Posts } from '../../api/post.js';
+import Posts from '../../api/post.js';
+import {withTracker} from 'meteor/react-meteor-data';
 
 class PostWrite extends Component {
     state={
         title:'',
         description:'',
-        content:''
+        content:'',
+        alert:''
     }
     handleChage=(e) =>{
         this.setState({
@@ -22,18 +25,61 @@ class PostWrite extends Component {
         const Title = this.state.title;
         const Description = this.state.description;
         const Content = this.state.content;
-        Meteor.call('post.insert',Title,Description,Content,(err)=>{
-            if(err){
+        if(this.props.match.path == '/postwrite'){
+            if(Title =='' && Description=='' && Content==''){
                 this.setState({
-                    error:{none:err.reason},
+                    alert:'3가지 모두 필수 입력입니다!',
                 })
+                //alert('필수 입력사항 입니다 ');
             }
             else{
-                this.props.history.push('/');
+                Meteor.call('post.insert',Title,Description,Content,(err)=>{
+                    if(err){
+                        this.setState({
+                            error:{none:err.reason},
+                        })
+                    }
+                    else{
+                        this.props.history.push('/');
+                    }
+                });
             }
-        });
+        }
+        else{
+            if(Title =='' && Description=='' &&Content==''){
+                this.setState({
+                    alert:'3가지 모두 필수 입력입니다!',
+                })
+                //alert('필수 입력사항 입니다 ');
+            }
+            else{
+                Meteor.call('post.update',this.props.match.params.id,Title,Description,Content,(err)=>{
+                    if(err){
+                        this.setState({
+                            error:{none:err.reason},
+                        })
+                    }
+                    else{
+                        this.props.history.push('/');
+                        alert('업데이트 성공');
+                    }
+                })
+            }
+        }
+    //     Meteor.call('post.insert',Title,Description,Content,(err)=>{
+    //         if(err){
+    //             this.setState({
+    //                 error:{none:err.reason},
+    //             })
+    //         }
+    //         else{
+    //             this.props.history.push('/');
+    //         }
+    //     });
     }
     render() {
+        // const test = this.props.match.url
+        // console.log(test);
         return (
             <div>
                 <h1>포스트 작성 화면입니다</h1>
@@ -58,21 +104,32 @@ class PostWrite extends Component {
                          onChange={this.handleChage}/>
                     </Form.Field> */}
                     {/* <Form.Field label='Description' control='textarea' name="content"/> */}
-                    <Form.Field>
+                    {/* <Form.Field>
                         <label>Content</label>
                         <input placeholder='content' 
                          control='textarea'
                          name="content"
                          onChange={this.handleChage}/>
-                    </Form.Field>
+                    </Form.Field> */}
+                    <Form.Field control={TextArea} label='Content' placeholder='Tell us more about you...' 
+                        name='content'
+                        onChange={this.handleChage}/>
                     {/* <Button basic><Link to="/">Cancel</Link></Button> */}
                     <Link to="/"><Button basic>Cancel</Button></Link>
                     <Button primary type='submit'>Save</Button>
-                    <div>{this.state.content} {this.state.description} {this.state.title}</div>
+                    <div className="modal">{this.state.alert}</div>
                 </Form>
             </div>
         );
     }
 }
 
-export default PostWrite;
+// export default PostWrite;
+export default withTracker((props)=>{
+    Meteor.subscribe('post').ready();
+    const Idtest = props.match.params.id
+    //console.log(Idtest);
+    return{
+        posts:Posts.find({_id:Idtest}).fetch()
+    }
+})(PostWrite);

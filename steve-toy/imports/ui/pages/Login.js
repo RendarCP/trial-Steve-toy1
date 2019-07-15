@@ -3,6 +3,7 @@ import { Button, Form } from 'semantic-ui-react';
 import {Link} from 'react-router-dom';
 import { Meteor } from 'meteor/meteor';
 import { createContainer } from 'meteor/react-meteor-data';
+import Header from '../components/Header.js';
 class Login extends Component {
     state={
         email:'',
@@ -32,6 +33,7 @@ class Login extends Component {
             }
             else{
                 this.props.history.push('/');
+                window.location.reload();
             }
         })
     }
@@ -57,8 +59,10 @@ class Login extends Component {
                          name="password"
                          onChange={this.handleChage}/>
                     </Form.Field>
-                    <Button basic><Link to="/">Cancel</Link></Button>
-                    <Button primary type='submit'>Ok</Button>
+                    <div className="buttonposition">
+                        <Button basic><Link to="/">Cancel</Link></Button>
+                        <Button primary type='submit'>Ok</Button>
+                    </div>
                 </Form>            
             </div>
         );

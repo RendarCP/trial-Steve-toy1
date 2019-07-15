@@ -66,4 +66,20 @@ label{
 }
 .modal{
   color:red;
+  font-size:20px;
+}
+.heart{
+  display: block;
+  /* position: absolute; */
+  margin:0 auto; 
+  text-align: right;
+}
+.Posts{
+  text-align: center;
+}
+.buttonposition{
+  margin: auto;
+  width:15%;
+  padding: 10px;
+  text-align:center;
 }
