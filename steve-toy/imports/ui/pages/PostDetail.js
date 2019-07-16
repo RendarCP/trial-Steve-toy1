@@ -6,61 +6,83 @@ import Posts from '../../api/post.js';
 import PostList from '../pages/PostList.js';
 import {Link} from 'react-router-dom';
 import { Match } from 'meteor/check';
+import post from '../../api/post.js';
 
 class PostDetail extends Component {
     state={
         favoriteLike:false,
-        heartname:true,
+        heartname:false,
     }
     handleLike=(e)=>{
         this.setState(prevState=>({
             heartname : !prevState.heartname
         }));
         console.log(this.state.heartname);
-        if(this.state.heartname ==false){
-            Meteor.call('post.favorite',this.props.match.params.id,Meteor.user()._id,(err)=>{
-                if(err){
+        // return this.props.posts.map((posts)=>{
+        //     return posts.favorite.map((maps)=>{
+        //         console.log(maps);
+        //     })
+        // })
+        return this.props.posts.map((posts)=>{
+            if(posts.favorite.length == 0){
+                this.setState({
+                    heartname:true
+                })
+                Meteor.call('post.favorite',this.props.match.params.id,Meteor.user()._id,(err)=>{
+                    if(err){
+                        this.setState({
+                            error:{none:err.reason},
+                        })
+                    }
+                    else{
+                        alert("좋아요 완료!!");
+                    }
+                })
+            }
+            else{
+            return posts.favorite.map((favorites)=>{
+                if(favorites == Meteor.user()._id){
                     this.setState({
-                        error:{none:err.reason},
+                        heartname:true
                     })
+                    alert('이미 눌르셨습니다');
                 }
                 else{
-                    alert('favorite 성공');
+                    if(favorites !== Meteor.user()._id){
+                        Meteor.call('post.favorite',this.props.match.params.id,Meteor.user()._id,(err)=>{
+                            if(err){
+                                this.setState({
+                                    error:{none:err.reason},
+                                })
+                            }
+                            else{
+                                alert("좋아요 완료!!");
+                            }
+                        })
+                    }
                 }
             })
-        }
+          }
+        })
     }
-    // handleDisLike=(e)=>{
-    //     this.setState({
-    //         favoriteLike:false,
-    //         heartname:'heart outline'
-    //     })
-    // }
     PostEdit(){
-    //     console.log(this.props.posts.owner);
-    //    if(this.props.posts.owner == Meteor.user()){
-    //         return <Link to={`/postwrite/${this.props.posts._id}`}></Link>
-    //     }
         return this.props.posts.map((posts)=>{
-            // console.log(posts.owner);
-            // console.log(Meteor.user()._id);
             if(posts.owner == Meteor.user()._id){
                 return <Link to={`/postupdate/${posts._id}`} key={posts._id}><Button primary>Post Edit</Button></Link>
             }
         })
 
     }
-    renderPostDetail(){
+    renderPostDetail(){        
         if(Meteor.userId()){
         return this.props.posts.map((posts)=>{
             return <Container key={posts._id} text style={{ marginTop: '7em' }}>
-                <Button onClick={this.handleLike}><Icon name={this.state.heartname ? 'heart' : 'heart outline'} className="heart" size='big'/></Button>
+                <Button onClick={this.handleLike}><Icon name={this.state.heartname ? 'heart red' : 'heart outline red'} className="heart" size='big'/></Button>
             <Header className="Posts" as='h1'>{posts.title}</Header>
             <p className="Posts">{posts.description}</p>
             <p>
             {posts.content}
             </p>
-            {/* <Link to={`/postupdate/${posts._id}`}><Button primary>Post Edit</Button></Link> */}
             {this.PostEdit()}
         </Container>
             })
@@ -69,14 +91,15 @@ class PostDetail extends Component {
         this.props.history.push('/');
         alert("로그인이 필요합니다");
         }
+        // return this.props.posts.map((favorietes)=>{
+        //     return favorietes.favorite.map((maps)=>{
+        //         console.log(maps);
+        //     })
+        // })
     }
     render() {
         // console.log(this.props.match.params);
         // const idtest = this.props.match.params.id;
-        // console.log(idtest);
-        // const idtest = this.props.posts.map((post)=>{
-        //     return post.title
-        // })
         // console.log(idtest);
         return (
             <div className="postDetail">
@@ -106,6 +129,6 @@ export default withTracker((props)=>{
     //console.log(ready);
     const postId = props.match.params.id
     return{
-        posts:Posts.find({_id:postId}).fetch()
+        posts:Posts.find({_id:postId}).fetch(),
     }
 })(PostDetail);

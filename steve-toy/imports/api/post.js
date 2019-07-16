@@ -37,6 +37,7 @@ Meteor.methods({
             createdAt: new Date(),
             owner: this.userId,
             username:Meteor.users.findOne(this.userId).profile.userName,
+            favorite:[],
         });
     },
     'post.update' (postId,title,description,content){
@@ -52,6 +53,6 @@ Meteor.methods({
         //     throw new Meteor.Error('non-Authorized');
         // }
         // Posts.update(postId,{$set:{favorite:[$push:{like:favorite}]}})
-        Posts.update(postId,{$push:{favorite:favorite}})
+        Posts.update(postId,{$addToSet:{favorite:favorite}})
     }
 })
