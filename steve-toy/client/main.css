@@ -16,9 +16,9 @@ body {
   color:white;
   font-size:20px;
 }
-.Nav{
+/* .Nav{
   background-color: skyblue;
-}
+} */
 .chatForm{ /* chat의 상단 */
   border: 2px solid black;
   padding:10px;
@@ -56,6 +56,8 @@ label{
 }
 .PostList{
   border:1px solid black;
+  background:#e3f9ff;
+  border-radius: 25px;
 }
 .postDetail{
   display: flex;

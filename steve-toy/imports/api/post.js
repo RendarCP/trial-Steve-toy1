@@ -1,7 +1,9 @@
 import { Mongo } from 'meteor/mongo';
 import { Meteor } from 'meteor/meteor';
+import 'moment';
 
 export default Posts = new Mongo.Collection('post');
+//export const Comments = new Mongo.Collection('comments');
 
 if(Meteor.isServer) {
     Meteor.publish('post',function(){
@@ -34,7 +36,8 @@ Meteor.methods({
             title,
             description,
             content,
-            createdAt: new Date(),
+            // createdAt: new Date(),
+            createdAt: moment().format(),
             owner: this.userId,
             username:Meteor.users.findOne(this.userId).profile.userName,
             favorite:[],
@@ -54,5 +57,20 @@ Meteor.methods({
         // }
         // Posts.update(postId,{$set:{favorite:[$push:{like:favorite}]}})
         Posts.update(postId,{$addToSet:{favorite:favorite}})
-    }
+    },
+    'post.favoirte.remove' (postId,favoirte){
+        Posts.update(postId,{$unset:{favoirte:favoirte}})
+    },
+    // 'comments.insert' (postId,comments){
+    //     if(!this.userId){
+    //         throw new Meteor.Error('not-authorized');
+    //     }
+    //     Comments.insert({
+    //         postId,
+    //         comments,
+    //         createdAt: new Date(),
+    //         owner: this.userId,
+    //         username:Meteor.users.findOne(this.userId).profile.userName,
+    //     })
+    // }
 })

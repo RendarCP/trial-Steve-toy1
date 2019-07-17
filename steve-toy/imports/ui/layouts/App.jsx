@@ -5,7 +5,7 @@ import Headers from '../components/Header.js';
 import { BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 // import login from '../pages/Login';
 // import signup from '../pages/SignUp';
-import {login , signup,postwrite,postdetail} from '../pages/index.js';
+import {login , signup,postwrite,postdetail,favoritepost} from '../pages/index.js';
 import Home from '../components/Home.js';
 import { Posts } from '../../api/post.js';
 import { withTracker } from 'meteor/react-meteor-data';
@@ -24,6 +24,7 @@ const App = () => (
               <Route path="/signup" component={signup}/>
               <Route path="/post/:id" component={postdetail}/>
               <Route path="/postupdate/:id" component={postwrite}/>
+              <Route path="/favorite" component={favoritepost}/>
             </Switch>
     </Router>
     </div>
