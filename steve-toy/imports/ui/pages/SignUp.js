@@ -3,6 +3,8 @@ import { Button, Form, Icon ,Message} from 'semantic-ui-react';
 import {Link} from 'react-router-dom';
 import { Accounts } from 'meteor/accounts-base';
 import { createContainer } from 'meteor/react-meteor-data';
+import { Meteor } from 'meteor/meteor';
+import {withTracker} from 'meteor/react-meteor-data';
 class SignUp extends Component {
     state = {
         email:'',
@@ -26,12 +28,6 @@ class SignUp extends Component {
             //passwordCheck: e.target.password.value
         });
     }
-    // handleOnPasswordInput(passwordInput){
-    //     this.setState({password:passwordInput});
-    // }
-    // handleOnCofirmPasswordInput(confirmPasswordInput){
-    //     this.setState({passwordCheck:confirmPasswordInput});
-    // }
     handleOnPasswordInput=(e)=>{
         this.setState({password:e.target.value});
     }
@@ -57,24 +53,55 @@ class SignUp extends Component {
         const password = this.state.password;
         const userName = this.state.userName;
         const phoneNumber = this.state.PhoneNumber;
-        Accounts.createUser({
-            email,
-            password,
-            profile:{
-                userName,
-                phoneNumber,
-            }
-
-        }, (err)=>{
-            if(err){
+        if(this.props.match.path == '/signup'){
+            Accounts.createUser({
+                email,
+                password,
+                profile:{
+                    userName,
+                    phoneNumber,
+                }
+    
+            }, (err)=>{
+                if(err){
+                    this.setState({
+                        error:{none:err.reason},
+                    });
+                }
+                else{
+                    this.props.history.push('/login');
+                }
+            });
+        }
+        else{
+            // return Meteor.user().emails.map((emails)=>{
+            //     this.setState({
+            //         email:emails.address,
+            //         userName:Meteor.user().profile.userName,
+            //         password:'',
+            //         passwordCheck:'',
+            //         PhoneNumber:'',
+            //     })
+            // })
+            return this.props.userinfo.emails.map((emails)=>{
+                
+            })
+        }
+    }
+    componentDidMount(){
+        if(Meteor.user()){
+            return this.props.userinfo.emails.map((emails)=>{
+                console.log(emails.address);
                 this.setState({
-                    error:{none:err.reason},
-                });
-            }
-            else{
-                this.props.history.push('/login');
-            }
-        });
+                    email:emails.address,
+                    userName:this.props.userinfo.profile.userName,
+                    // password:'',
+                    password:this.props.userinfo,
+                    passwordCheck:'',
+                    PhoneNumber:this.props.userinfo.profile.phoneNumber,
+                })
+            })
+        }
     }
     render() {
         return (
@@ -86,12 +113,14 @@ class SignUp extends Component {
                         <input placeholder='sample@mail.com'
                          type="email"
                          name="email"
+                         value={this.state.email}
                          onChange={this.handleChage}/>
                     </Form.Field>
                     <Form.Field>
                         <label>Name</label>
                         <input placeholder='Name' 
                          name="userName"
+                         value={this.state.userName}
                          onChange={this.handleChage}/>
                     </Form.Field>
                     <Form.Field>
@@ -113,6 +142,7 @@ class SignUp extends Component {
                         <label>Phone Number</label>
                         <input placeholder='Phone'
                          name="PhoneNumber" 
+                         value={this.state.PhoneNumber}
                          onChange={this.handleChage}/>
                     </Form.Field>
                     <div className="buttonposition">
@@ -122,9 +152,14 @@ class SignUp extends Component {
                     {/* <Button basic><Link to="/">Cancel</Link></Button>
                     <Button primary type='submit'>Ok</Button> */}
                 </Form>
+                {this.state.email} + {this.state.userName} + {this.state.PhoneNumber} + {this.state.password}
             </div>
         );
     }
 }
 
-export default SignUp;
+export default withTracker(()=>{
+    return{
+        userinfo:Meteor.user()
+    }
+})(SignUp);

@@ -37,7 +37,7 @@ class PostDetail extends Component {
                         })
                     }
                     else{
-                        alert("좋아요 완료!!");
+                        console.log("좋아요 완료!!");
                     }
                 })
             }
@@ -45,23 +45,36 @@ class PostDetail extends Component {
             return posts.favorite.map((favorites)=>{
                 if(favorites == Meteor.user()._id){
                     this.setState({
-                        heartname:true,
+                        heartname:false,
                     })
-                    alert('이미 눌르셨습니다');
+                    Meteor.call('post.favoirte.remove',this.props.match.params.id,Meteor.user()._id,(err)=>{
+                        if(err){
+                            this.setState({
+                                error:{none:err.reason},
+                            })
+                        }
+                        else{
+                            this.setState({
+                                heartname:false,
+                            })
+                            console.log('좋아요 취소완료');
+                        }
+                    })
                 }
                 else{
-                    if(favorites !== Meteor.user()._id){
-                        Meteor.call('post.favorite',this.props.match.params.id,Meteor.user()._id,(err)=>{
-                            if(err){
-                                this.setState({
-                                    error:{none:err.reason},
-                                })
-                            }
-                            else{
-                                alert("좋아요 완료!!");
-                            }
-                        })
-                    }
+                    Meteor.call('post.favorite',this.props.match.params.id,Meteor.user()._id,(err)=>{
+                        if(err){
+                            this.setState({
+                                error:{none:err.reason},
+                            })
+                        }
+                        else{
+                            this.setState({
+                                heartname:true,
+                            })
+                            console.log('좋아요 완료!');
+                        }
+                    })
                 }
             })
           }
@@ -76,7 +89,6 @@ class PostDetail extends Component {
 
     }
     SubmitComment=(e)=>{
-        console.log('click!');
         e.preventDefault();
         const Comment = this.state.comment;
         if(Comment==''){
@@ -93,7 +105,7 @@ class PostDetail extends Component {
                     this.setState({
                         comment:''
                     })
-                    alert('댓글 등록완료!!');
+                    console.log('댓글 등록완료');
                 }
             })
         }
@@ -101,27 +113,19 @@ class PostDetail extends Component {
     renderCommentDetail(){
         return this.props.comments.map((comments)=>{
             if(comments.postId == this.props.match.params.id){
-                console.log(comments.createdAt);
-            //     return   <Container key={comments._id} className="Comment">
-            //     <p style={{ fontSize: '1.33em' }}>
-            //             <b>{comments.username}</b> 
-            //     </p>
-            //     <p>
-            //         {comments.comments}
-            //     </p>
-            // </Container>
            return <Card fluid color='red' key={comments._id}>
-                <Card.Header>{comments.username}</Card.Header><p>{moment(comments.createdAt).fromNow()}</p>
+                <Card.Header>{comments.username}</Card.Header>
+                <Card.Meta><p>{moment(comments.createdAt).fromNow()}</p></Card.Meta>
                 <Card.Content>{comments.comments}</Card.Content>
           </Card>
             }
         })
     }
-    renderPostDetail(){        
+    renderPostDetail(){      
         if(Meteor.userId()){
         return this.props.posts.map((posts)=>{
             return <Container key={posts._id} text style={{ marginTop: '7em' }}>
-                <Button onClick={this.handleLike}><Icon name={this.state.heartname ? 'heart red' : 'heart outline red'} className="heart" size='big'/></Button>
+                <Button onClick={this.handleLike}><Icon color='red' name={this.state.heartname ? 'heart' : 'heart outline'} className="heart" size='big'/></Button>
             <Header className="Posts" as='h1'>{posts.title}</Header>
             <p className="Posts">{posts.description}</p>
             <p>
@@ -135,6 +139,17 @@ class PostDetail extends Component {
         this.props.history.push('/');
         alert("로그인이 필요합니다");
         }
+    }
+    componentDidMount(){
+        return this.props.posts.map((posts)=>{
+            return posts.favorite.map((favorites)=>{
+                if(favorites == Meteor.user()._id){
+                    this.setState({
+                        heartname:true,
+                    })
+                }
+            })
+        })
     }
     render() {
         return (
@@ -154,9 +169,9 @@ class PostDetail extends Component {
 }
 
 export default withTracker((props)=>{
-    Meteor.subscribe('post').ready();
-    const ready=Meteor.subscribe('comments').ready();
-    console.log(ready);
+    Meteor.subscribe('post');
+    Meteor.subscribe('comments');
+    // console.log(ready);
     const postId = props.match.params.id
     return{
         posts:Posts.find({_id:postId}).fetch(),

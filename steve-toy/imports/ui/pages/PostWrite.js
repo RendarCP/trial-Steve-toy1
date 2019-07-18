@@ -26,7 +26,7 @@ class PostWrite extends Component {
         const Description = this.state.description;
         const Content = this.state.content;
         if(this.props.match.path == '/postwrite'){
-            if(Title =='' && Description=='' && Content==''){
+            if(Title =='' || Description=='' || Content==''){
                 this.setState({
                     alert:'3가지 모두 필수 입력입니다!',
                 })

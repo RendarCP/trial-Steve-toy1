@@ -58,8 +58,8 @@ Meteor.methods({
         // Posts.update(postId,{$set:{favorite:[$push:{like:favorite}]}})
         Posts.update(postId,{$addToSet:{favorite:favorite}})
     },
-    'post.favoirte.remove' (postId,favoirte){
-        Posts.update(postId,{$unset:{favoirte:favoirte}})
+    'post.favoirte.remove' (postId,favorite){
+        Posts.update(postId,{$pull:{favorite:favorite}})
     },
     // 'comments.insert' (postId,comments){
     //     if(!this.userId){

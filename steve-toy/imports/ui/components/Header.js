@@ -22,6 +22,7 @@ class Header extends Component {
                 this.setState({
                     isLoggedIn:true,
                 })
+                window.location.reload();
             }
         });
     }
@@ -54,6 +55,8 @@ class Header extends Component {
                         </Menu.Menu>
                             <Link to="/" className="mainButton">Steve Toy Project</Link>
                             <Menu.Menu position='right'>
+                            {Meteor.userId() ? (<Link to={`/userinfo/${Meteor.userId()}`}><Button basic inverted className="loginButton">UserInfo</Button></Link>
+                            ): null}
                             { !Meteor.userId() ? (
                             <Link to="/login"><Button basic inverted className="loginButton">LOG IN</Button></Link>):
                                 (<Button basic inverted onClick={this.logOut}>Log Out</Button>  )
