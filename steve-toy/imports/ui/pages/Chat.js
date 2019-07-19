@@ -3,6 +3,7 @@ import { Input,List, Image,Button,Form,Label } from 'semantic-ui-react';
 import { Meteor } from 'meteor/meteor';
 import {withTracker} from 'meteor/react-meteor-data';
 import Chatting from '../../api/chatting.js';
+import chatting from '../../api/chatting.js';
 
 
 class Chat extends Component {
@@ -15,8 +16,10 @@ class Chat extends Component {
         })
     }
     submitChat=(e)=>{
-        e.preventDefault();
         const chatting = this.state.chatting;
+        this.setState({
+            chatting:'',
+        })
         if(Meteor.user()){
             if(chatting==''){
                 console.log('빈값은 삽입될수 없습니다');
@@ -29,9 +32,6 @@ class Chat extends Component {
                         })
                     }
                     else{
-                        this.setState({
-                            chatting:'',
-                        })
                         console.log('채팅 삽입');
                     }
                 })
@@ -63,13 +63,21 @@ class Chat extends Component {
             }
         })
     }
+    handleKey=()=>{
+        if (event.key == 'Enter') {
+            this.setState({
+                chatting:"",
+            })
+            this.submitChat();
+            }
+    }
     render() {
         return (
             <div>
             <List className="chatscroll">
                 {this.renderChat()}
             </List>
-            <Form onSubmit={this.submitChat}>
+            <Form onSubmit={this.submitChat} onKeyPress={this.handleKey}>
                 <Form.TextArea onChange={this.handleChange} name='chatting' label='채팅' placeholder='Tell us more about you...'></Form.TextArea>
                 <Button type='submit' primary>Send</Button>
             </Form>
@@ -79,8 +87,8 @@ class Chat extends Component {
 }
 
 export default withTracker(()=>{
-   const ready = Meteor.subscribe('chats').ready();
-    console.log(ready);
+   const ready = Meteor.subscribe('chats');
+    // console.log(ready);
     return{
         chats:Chatting.find().fetch()
     }

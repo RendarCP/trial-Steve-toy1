@@ -9,6 +9,16 @@ if(Meteor.isServer) {
     Meteor.publish('post',function(){
         return Posts.find();
     })
+    Meteor.publish('posts.favorites',function(){
+        const selector = {
+            favorite: {
+                $in: [this.userId]
+            }
+        }
+        favorites = Posts.find(selector);
+        return favorites;
+    })
+    
 }
 // if(Meteor.isClient){
 //     Meteor.subscribe('post',function(){

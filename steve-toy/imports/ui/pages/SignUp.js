@@ -10,6 +10,7 @@ class SignUp extends Component {
         email:'',
         userName:'',
         password:'',
+        newPassword:'',
         passwordCheck:'',
         PhoneNumber:'',
     }
@@ -31,12 +32,19 @@ class SignUp extends Component {
     handleOnPasswordInput=(e)=>{
         this.setState({password:e.target.value});
     }
+    handleOnNewPasswordInput=(e)=>{
+        this.setState({newPassword:e.target.value});
+    }
     handleOnCofirmPasswordInput=(e)=>{
         this.setState({passwordCheck:e.target.value});
     }
     passwordMatch(){
         const { password,passwordCheck} = this.state;
         return password===passwordCheck;
+    }
+    newpasswordMatch(){
+        const {newPassword,passwordCheck} =this.state;
+        return newPassword === passwordCheck;
     }
     renderFeedbackMessage(){
        //const{passwordCheck} =this.state;
@@ -46,6 +54,13 @@ class SignUp extends Component {
                     <div className="modal">패스워드가 일치하지 않습니다</div>
                 )
             }
+    }
+    renderNewFeedbackMessage(){
+        if(!this.newpasswordMatch()){
+            return(
+                <div className="modal">패스워드가 일치하지 않습니다</div>
+            )
+        }
     }
     onSubmit=(e)=>{
         e.preventDefault();
@@ -74,29 +89,39 @@ class SignUp extends Component {
             });
         }
         else{
-            // return Meteor.user().emails.map((emails)=>{
-            //     this.setState({
-            //         email:emails.address,
-            //         userName:Meteor.user().profile.userName,
-            //         password:'',
-            //         passwordCheck:'',
-            //         PhoneNumber:'',
-            //     })
-            // })
-            return this.props.userinfo.emails.map((emails)=>{
-                
+            return Meteor.user().emails.map((emails)=>{
+                const newPassword = this.state.newPassword;
+                // this.setState({
+                //     email:emails.address,
+                //     userName:Meteor.user().profile.userName,
+                //     password:'',
+                //     passwordCheck:'',
+                //     PhoneNumber:'',
+                // })
+                Accounts.changePassword(
+                    password,
+                    newPassword,
+                (err)=>{
+                    if(err){
+                        this.setState({
+                            error:{none:err.reason},
+                        })
+                    }
+                    else{
+                        this.props.history.push('/login');
+                    }
+                })
             })
         }
     }
     componentDidMount(){
         if(Meteor.user()){
             return this.props.userinfo.emails.map((emails)=>{
-                console.log(emails.address);
                 this.setState({
                     email:emails.address,
                     userName:this.props.userinfo.profile.userName,
                     // password:'',
-                    password:this.props.userinfo,
+                    password:'',
                     passwordCheck:'',
                     PhoneNumber:this.props.userinfo.profile.phoneNumber,
                 })
@@ -128,16 +153,26 @@ class SignUp extends Component {
                         <input placeholder='Password'
                          //onChange={e=>this.handleOnPasswordInput(e.target.value)} />
                          type="password"
+                         name="password"
                          onChange={this.handleOnPasswordInput}/>
                     </Form.Field>
+                    {Meteor.user() ? (<Form.Field>
+                        <label>New Password</label>
+                        <input placeholder='Password'
+                         //onChange={e=>this.handleOnPasswordInput(e.target.value)} />
+                         type="Password"
+                         name="newPassword"
+                         onChange={this.handleOnNewPasswordInput}/>
+                    </Form.Field>):null}
                     <Form.Field>
                         <label>Password Confirm</label>
                         <input placeholder='Password Confirm'
                             type="password"
                          //onChange={e=>this.handleOnCofirmPasswordInput(e.target.value)} />
                          onChange={this.handleOnCofirmPasswordInput}/>
-                         {this.renderFeedbackMessage()}
                     </Form.Field>
+                    {Meteor.user() ? (`${this.renderNewFeedbackMessage()}`): (`${this.renderFeedbackMessage()}`)}
+                    {this.renderFeedbackMessage()}
                     <Form.Field>
                         <label>Phone Number</label>
                         <input placeholder='Phone'
@@ -149,10 +184,7 @@ class SignUp extends Component {
                         <Button basic><Link to="/">Cancel</Link></Button>
                         <Button primary type='submit'>Ok</Button>
                     </div>
-                    {/* <Button basic><Link to="/">Cancel</Link></Button>
-                    <Button primary type='submit'>Ok</Button> */}
                 </Form>
-                {this.state.email} + {this.state.userName} + {this.state.PhoneNumber} + {this.state.password}
             </div>
         );
     }

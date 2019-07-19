@@ -38,7 +38,7 @@ class PostList extends Component {
                 </a>
                 <a> 
                     <Icon name='comment'/>
-                    333
+                    33
                 </a>
                 {/* {this.countComments()} */}
             </Card.Content>
@@ -87,7 +87,7 @@ export default withTracker(()=>{
     Meteor.subscribe('comments');
     //console.log(posttest);
         return{
-            posts: Posts.find().fetch(),
+            posts: Posts.find({},{ $sort: {createdAt:-1}}).fetch(),
             comments:Comments.find().fetch(),
         }
 })(PostList);

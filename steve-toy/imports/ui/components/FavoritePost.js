@@ -11,7 +11,7 @@ class FavoritePost extends Component {
         return this.props.posts.map((posts)=>{
             return posts.favorite.map((favorites)=>{
                 if(favorites == Meteor.user()._id){
-                    return     <Card link key={posts._id} className="PostList">
+                    return     <Card link key={favorites} className="PostList">
                     <Card.Content>
                     {/* <Link to={`/post/${posts._id}`}> */}
                         <Card.Header className="titleHeader"><Link to={`/post/${posts._id}`}>{posts.title}</Link></Card.Header>
@@ -46,7 +46,7 @@ class FavoritePost extends Component {
 }
 
 export default withTracker(()=>{
-    const test = Meteor.subscribe('post');
+    const test = Meteor.subscribe('posts.favorites');
     return{
         posts:Posts.find().fetch()
     }

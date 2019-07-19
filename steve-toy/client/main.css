@@ -25,8 +25,8 @@ body {
   flex-direction: column;
 }
 .chatProfile{ /* chat프로필 부분  */
-  margin:20px;
-  padding:10px;
+  margin:10px;
+  padding:5px;
   display: flex;
   flex-direction: column;
 }
@@ -75,10 +75,11 @@ label{
   text-align:center;
 }
 .chatting{
-  width:60%;
+  width:55%;
 }
 .chatlist{
   width:50%;
+  flex: auto;
   display: flex;
   justify-content: flex-end;
 }
@@ -92,6 +93,8 @@ label{
   overflow-x:hidden;
 }
 .chatlistath{
+  flex: auto;
+  width:50%;
   display: flex;
   justify-content: flex-start;
 }

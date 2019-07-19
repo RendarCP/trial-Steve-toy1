@@ -26,22 +26,11 @@ class Header extends Component {
             }
         });
     }
-    // renderLoginButton(){
-    //     if(Meteor.userId()){
-    //         <Button onClick={this.logOut}>Log Out</Button>
-    //     }
-    //     else{
-    //         <Link to="/login"><Button className="loginButton">LOG IN</Button></Link>
-    //      <Link to="/signup"><Button className="signUpButton">SIGN UP</Button></Link>
-    //     }
-    // }
-    
     render() {
         const isLoggedIn = this.state.isLoggedIn;
-        console.log(isLoggedIn);
+        // console.log(isLoggedIn);
         //const { activeItem } = this.state
         return (
-            // <div>
                 <div className="Nav">
                     <Menu secondary inverted color='blue' size="huge">
                         <Menu.Menu position='left'>
@@ -64,13 +53,9 @@ class Header extends Component {
                             { !Meteor.userId()?(
                                 <Link to="/signup"><Button basic inverted className="signUpButton">SIGN UP</Button></Link>
                             ): null}
-                            {/* <Link to="/login"><Button className="loginButton">LOG IN</Button></Link>
-                            <Button onClick={this.logOut}>Log Out</Button>  
-                            <Link to="/signup"><Button className="signUpButton">SIGN UP</Button></Link> */}
                         </Menu.Menu>
                     </Menu>
                  </div>
-            // </div> 
         );
     }
 }
