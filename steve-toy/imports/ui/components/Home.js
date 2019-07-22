@@ -10,8 +10,6 @@ class Home extends Component {
             <div>
                 <ChatForm/>
                 <List/>
-                {/* <PostDetail/> */}
-                
             </div>
         );
     }

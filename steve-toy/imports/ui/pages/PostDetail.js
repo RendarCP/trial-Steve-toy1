@@ -24,7 +24,7 @@ class PostDetail extends Component {
         this.setState(prevState=>({
             heartname : !prevState.heartname
         }));
-        console.log(this.state.heartname);
+        // console.log(this.state.heartname);
         return this.props.posts.map((posts)=>{
             if(posts.favorite.length == 0){
                 this.setState({
@@ -113,11 +113,11 @@ class PostDetail extends Component {
     renderCommentDetail(){
         return this.props.comments.map((comments)=>{
             if(comments.postId == this.props.match.params.id){
-           return <Card fluid color='red' key={comments._id}>
-                <Card.Header>{comments.username}</Card.Header>
-                <Card.Meta><p>{moment(comments.createdAt).fromNow()}</p></Card.Meta>
-                <Card.Content>{comments.comments}</Card.Content>
-          </Card>
+           return   <Card fluid color='red' key={comments._id}>
+                        <Card.Header>{comments.username}</Card.Header>
+                        <Card.Meta><p className='comments'>{moment(comments.createdAt).fromNow()}</p></Card.Meta>
+                        <Card.Content>{comments.comments}</Card.Content>
+                    </Card>
             }
         })
     }
@@ -125,14 +125,12 @@ class PostDetail extends Component {
         if(Meteor.userId()){
         return this.props.posts.map((posts)=>{
             return <Container key={posts._id} text style={{ marginTop: '7em' }}>
-                <Button onClick={this.handleLike}><Icon color='red' name={this.state.heartname ? 'heart' : 'heart outline'} className="heart" size='big'/></Button>
-            <Header className="Posts" as='h1'>{posts.title}</Header>
-            <p className="Posts">{posts.description}</p>
-            <p>
-            {posts.content}
-            </p>
-            {this.PostEdit()}
-        </Container>
+                            <Icon onClick={this.handleLike} color='red' name={this.state.heartname ? 'heart' : 'heart outline'} className="heart" size='big'/>
+                        <Header className="Posts" as='h1'>{posts.title}</Header>
+                        <p className="Posts">{posts.description}</p>
+                        <p>{posts.content}</p>
+                        {this.PostEdit()}
+                    </Container>
             })
         }
         else{
@@ -155,14 +153,14 @@ class PostDetail extends Component {
         return (
             <div className="postDetail">
                 {this.renderPostDetail()}
-            <Container text style={{ marginTop: '7em' }}>
-                <Form onSubmit={this.SubmitComment}>
-                    <Form.Field control={TextArea} name='comment' onChange={this.handleChange} label='Comment' placeholder='Tell us more about you...' />
-                    <Button primary type='submit'>ADD COMMENT</Button>
-                </Form>
-                <div>{this.state.comment}</div>
-                {this.renderCommentDetail()}
-            </Container>
+                <Container text style={{ marginTop: '7em' }}>
+                    <Form onSubmit={this.SubmitComment}>
+                        <Form.Field control={TextArea} name='comment' onChange={this.handleChange} label='Comment' placeholder='Tell us more about you...' />
+                        <Button primary type='submit'>ADD COMMENT</Button>
+                    </Form>
+                    <div>{this.state.comment}</div>
+                    {this.renderCommentDetail()}
+                </Container>
             </div>
         );
     }

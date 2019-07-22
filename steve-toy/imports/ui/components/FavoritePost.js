@@ -12,24 +12,23 @@ class FavoritePost extends Component {
             return posts.favorite.map((favorites)=>{
                 if(favorites == Meteor.user()._id){
                     return     <Card link key={favorites} className="PostList">
-                    <Card.Content>
-                    {/* <Link to={`/post/${posts._id}`}> */}
-                        <Card.Header className="titleHeader"><Link to={`/post/${posts._id}`}>{posts.title}</Link></Card.Header>
-                    <Card.Description>
-                    {posts.description}
-                    </Card.Description>
-                </Card.Content>
-                <Card.Content extra>
-                    <a>
-                        <Icon name='heart' className="iconMargin" />
-                        {posts.favorite.length}
-                    </a>
-                    <a> 
-                        <Icon name='comment'/>
-                        333
-                    </a>
-                </Card.Content>
-              </Card>
+                                    <Card.Content>
+                                        <Card.Header className="titleHeader"><Link to={`/post/${posts._id}`}>{posts.title}</Link></Card.Header>
+                                    <Card.Description>
+                                    {posts.description}
+                                    </Card.Description>
+                                </Card.Content>
+                                <Card.Content extra>
+                                    <a>
+                                        <Icon name='heart' className="iconMargin" />
+                                        {posts.favorite.length}
+                                    </a>
+                                    <a> 
+                                        <Icon name='comment'/>
+                                        33
+                                    </a>
+                                </Card.Content>
+                            </Card>
                 }
             })
         })

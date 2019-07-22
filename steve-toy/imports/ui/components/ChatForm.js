@@ -22,9 +22,7 @@ class ChatForm extends Component {
                 <div className="chatList">
                     <ChatUser onChange={this.userForm}/>
                 </div>
-                {/* <div className="chatProfile"> */}
                     <DetailUser email={this.state.email} phone={this.state.phoneNumber}/>
-                {/* </div> */}
                 <div className="chatting">
                     <Chat/>
                 </div>

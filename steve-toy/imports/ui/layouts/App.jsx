@@ -13,8 +13,6 @@ const App = () => (
     <div>
     <Router>
       <Headers/>
-      {/* <Chatform/>
-      <Postlist/> */}
             <Switch>
               <Route path="/postwrite" component={postwrite}/>
               <Route exact path="/" component={Home}/>

@@ -46,8 +46,7 @@ Meteor.methods({
             title,
             description,
             content,
-            // createdAt: new Date(),
-            createdAt: moment().format(),
+            createdAt: new Date(),
             owner: this.userId,
             username:Meteor.users.findOne(this.userId).profile.userName,
             favorite:[],
@@ -62,25 +61,9 @@ Meteor.methods({
     },
     'post.favorite' (postId,favorite){
         const posts = Posts.findOne(postId);
-        // if(posts.owner !== this.userId){
-        //     throw new Meteor.Error('non-Authorized');
-        // }
-        // Posts.update(postId,{$set:{favorite:[$push:{like:favorite}]}})
         Posts.update(postId,{$addToSet:{favorite:favorite}})
     },
     'post.favoirte.remove' (postId,favorite){
         Posts.update(postId,{$pull:{favorite:favorite}})
     },
-    // 'comments.insert' (postId,comments){
-    //     if(!this.userId){
-    //         throw new Meteor.Error('not-authorized');
-    //     }
-    //     Comments.insert({
-    //         postId,
-    //         comments,
-    //         createdAt: new Date(),
-    //         owner: this.userId,
-    //         username:Meteor.users.findOne(this.userId).profile.userName,
-    //     })
-    // }
 })

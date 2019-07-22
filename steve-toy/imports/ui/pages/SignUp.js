@@ -14,19 +14,9 @@ class SignUp extends Component {
         passwordCheck:'',
         PhoneNumber:'',
     }
-    // checkPassword(){
-    //     if(!this.state.password || this.state.password != this.state.passwordCheck){
-    //         console.error("비밀번호 다름");
-            
-    //     }
-    //     else{
-
-    //     }
-    // }
     handleChage=(e) =>{
         this.setState({
             [e.target.name]: e.target.value,
-            //passwordCheck: e.target.password.value
         });
     }
     handleOnPasswordInput=(e)=>{
@@ -47,8 +37,6 @@ class SignUp extends Component {
         return newPassword === passwordCheck;
     }
     renderFeedbackMessage(){
-       //const{passwordCheck} =this.state;
-        //if(passwordCheck){
             if(!this.passwordMatch()){
                 return(
                     <div className="modal">패스워드가 일치하지 않습니다</div>
@@ -91,13 +79,6 @@ class SignUp extends Component {
         else{
             return Meteor.user().emails.map((emails)=>{
                 const newPassword = this.state.newPassword;
-                // this.setState({
-                //     email:emails.address,
-                //     userName:Meteor.user().profile.userName,
-                //     password:'',
-                //     passwordCheck:'',
-                //     PhoneNumber:'',
-                // })
                 Accounts.changePassword(
                     password,
                     newPassword,
@@ -111,6 +92,18 @@ class SignUp extends Component {
                         this.props.history.push('/login');
                     }
                 })
+                Meteor.users.update(
+                    Meteor.userId(),
+                    {
+                        $set:{
+                            profile:{
+                                userName:userName,
+                                phoneNumber:phoneNumber,
+                            }
+                        }
+                    }
+                    
+                )
             })
         }
     }
@@ -120,9 +113,6 @@ class SignUp extends Component {
                 this.setState({
                     email:emails.address,
                     userName:this.props.userinfo.profile.userName,
-                    // password:'',
-                    password:'',
-                    passwordCheck:'',
                     PhoneNumber:this.props.userinfo.profile.phoneNumber,
                 })
             })
@@ -133,14 +123,22 @@ class SignUp extends Component {
             <div>
                 <h1>회원가입 화면입니다</h1>
                   <Form onSubmit={this.onSubmit}>
-                    <Form.Field>
+                    {Meteor.user()? (<Form.Field>
+                        <label>Email</label>
+                        <input disabled placeholder='sample@mail.com'
+                         type="email"
+                         name="email"
+                         readOnly="readonly"
+                         value={this.state.email}
+                         onChange={this.handleChage}/>
+                    </Form.Field>) : (<Form.Field>
                         <label>Email</label>
                         <input placeholder='sample@mail.com'
                          type="email"
                          name="email"
                          value={this.state.email}
                          onChange={this.handleChage}/>
-                    </Form.Field>
+                    </Form.Field>)}
                     <Form.Field>
                         <label>Name</label>
                         <input placeholder='Name' 
@@ -171,8 +169,9 @@ class SignUp extends Component {
                          //onChange={e=>this.handleOnCofirmPasswordInput(e.target.value)} />
                          onChange={this.handleOnCofirmPasswordInput}/>
                     </Form.Field>
-                    {Meteor.user() ? (`${this.renderNewFeedbackMessage()}`): (`${this.renderFeedbackMessage()}`)}
-                    {this.renderFeedbackMessage()}
+                    {/* {Meteor.user() ? (`${this.renderNewFeedbackMessage()}`): (`${this.renderFeedbackMessage()}`)}
+                    {this.renderFeedbackMessage()} */}
+                    {Meteor.user() ? this.renderNewFeedbackMessage() : this.renderFeedbackMessage()}
                     <Form.Field>
                         <label>Phone Number</label>
                         <input placeholder='Phone'

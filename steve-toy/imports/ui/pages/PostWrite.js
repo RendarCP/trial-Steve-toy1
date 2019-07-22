@@ -30,7 +30,6 @@ class PostWrite extends Component {
                 this.setState({
                     alert:'3가지 모두 필수 입력입니다!',
                 })
-                //alert('필수 입력사항 입니다 ');
             }
             else{
                 Meteor.call('post.insert',Title,Description,Content,(err)=>{
@@ -66,16 +65,17 @@ class PostWrite extends Component {
                 })
             }
         }
-    //     Meteor.call('post.insert',Title,Description,Content,(err)=>{
-    //         if(err){
-    //             this.setState({
-    //                 error:{none:err.reason},
-    //             })
-    //         }
-    //         else{
-    //             this.props.history.push('/');
-    //         }
-    //     });
+    }
+    componentDidMount(){
+        if(Meteor.user()){
+            return this.props.posts.map((posts)=>{
+                this.setState({
+                    title:posts.title,
+                    description:posts.description,
+                    content:posts.content,
+                })
+            })
+        }
     }
     render() {
         // const test = this.props.match.url
@@ -89,30 +89,19 @@ class PostWrite extends Component {
                         <input placeholder='Title Only'
                          type="text"
                          name="title"
+                         value={this.state.title}
                          onChange={this.handleChage}/>
                     </Form.Field>
                     <Form.Field>
                         <label>Description</label>
                         <input placeholder='Name' 
                          name="description"
+                         value={this.state.description}
                          onChange={this.handleChage}/>
                     </Form.Field>
-                    {/* <Form.Field>
-                        <label>Phone Number</label>
-                        <input placeholder='Name'
-                         name="PhoneNumber" 
-                         onChange={this.handleChage}/>
-                    </Form.Field> */}
-                    {/* <Form.Field label='Description' control='textarea' name="content"/> */}
-                    {/* <Form.Field>
-                        <label>Content</label>
-                        <input placeholder='content' 
-                         control='textarea'
-                         name="content"
-                         onChange={this.handleChage}/>
-                    </Form.Field> */}
                     <Form.Field control={TextArea} label='Content' placeholder='Tell us more about you...' 
                         name='content'
+                        value={this.state.content}
                         onChange={this.handleChage}/>
                     {/* <Button basic><Link to="/">Cancel</Link></Button> */}
                     <Link to="/"><Button basic>Cancel</Button></Link>
@@ -124,11 +113,9 @@ class PostWrite extends Component {
     }
 }
 
-// export default PostWrite;
 export default withTracker((props)=>{
     Meteor.subscribe('post').ready();
     const Idtest = props.match.params.id
-    //console.log(Idtest);
     return{
         posts:Posts.find({_id:Idtest}).fetch()
     }

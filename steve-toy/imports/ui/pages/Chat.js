@@ -43,19 +43,19 @@ class Chat extends Component {
             if(Meteor.user()){
                 if(chats.userId == Meteor.user()._id){
                     return  <List.Item key={chats._id}>
-                    <List.Content className="chatlist" floated='right'>
-                        <Label.Detail>{moment(chats.createdAt).format("MMM Do YY")}</Label.Detail>
-                        <Label size='large' pointing='right' color='orange'>{chats.chatcontent}</Label>
-                    </List.Content>
-                    </List.Item>
+                                <List.Content className="chatlist" floated='right'>
+                                    <Label.Detail>{moment(chats.createdAt).format("MMM Do YY")}</Label.Detail>
+                                    <Label size='large' pointing='right' color='orange'>{chats.chatcontent}</Label>
+                                </List.Content>
+                            </List.Item>
                 }
                 else{
                     return  <List.Item key={chats._id}>
-                    <List.Content className="chatlistath" floated='left'>
-                        <Label size='large' pointing='left'>{chats.chatcontent}</Label>
-                        <Label.Detail>{moment(chats.createdAt).format("MMM Do YY")}</Label.Detail>
-                    </List.Content>
-                    </List.Item>
+                                <List.Content className="chatlistath" floated='left'>
+                                    <Label size='large' pointing='left'>{chats.chatcontent}</Label>
+                                    <Label.Detail>{moment(chats.createdAt).format("MMM Do YY")}</Label.Detail>
+                                </List.Content>
+                            </List.Item>
                 }
             }
             else{
@@ -87,8 +87,7 @@ class Chat extends Component {
 }
 
 export default withTracker(()=>{
-   const ready = Meteor.subscribe('chats');
-    // console.log(ready);
+    Meteor.subscribe('chats');
     return{
         chats:Chatting.find().fetch()
     }
