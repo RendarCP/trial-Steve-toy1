@@ -22,3 +22,4 @@ accounts-password
 aldeed:simple-schema
 momentjs:moment
 mizzao:user-status
+meteortesting:mocha

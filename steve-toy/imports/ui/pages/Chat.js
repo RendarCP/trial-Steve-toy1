@@ -32,6 +32,9 @@ class Chat extends Component {
                         })
                     }
                     else{
+                        this.setState({
+                            chatting:'',
+                        })
                         console.log('채팅 삽입');
                     }
                 })
@@ -66,7 +69,7 @@ class Chat extends Component {
     handleKey=()=>{
         if (event.key == 'Enter') {
             this.setState({
-                chatting:"",
+                chatting:'',
             })
             this.submitChat();
             }
@@ -78,7 +81,7 @@ class Chat extends Component {
                 {this.renderChat()}
             </List>
             <Form onSubmit={this.submitChat} onKeyPress={this.handleKey}>
-                <Form.TextArea onChange={this.handleChange} name='chatting' label='채팅' placeholder='Tell us more about you...'></Form.TextArea>
+                <Form.TextArea onChange={this.handleChange} value={this.state.chatting} name='chatting' label='채팅' placeholder='Tell us more about you...'></Form.TextArea>
                 <Button type='submit' primary>Send</Button>
             </Form>
           </div>

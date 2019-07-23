@@ -89,7 +89,7 @@ class PostDetail extends Component {
 
     }
     SubmitComment=(e)=>{
-        e.preventDefault();
+       // e.preventDefault();
         const Comment = this.state.comment;
         if(Comment==''){
                 alert('댓글을 입력하셔야됩니다');
@@ -109,6 +109,11 @@ class PostDetail extends Component {
                 }
             })
         }
+    }
+    handleKey=()=>{
+        if (event.key == 'Enter') {
+            this.SubmitComment();
+            }
     }
     renderCommentDetail(){
         return this.props.comments.map((comments)=>{
@@ -154,8 +159,8 @@ class PostDetail extends Component {
             <div className="postDetail">
                 {this.renderPostDetail()}
                 <Container text style={{ marginTop: '7em' }}>
-                    <Form onSubmit={this.SubmitComment}>
-                        <Form.Field control={TextArea} name='comment' onChange={this.handleChange} label='Comment' placeholder='Tell us more about you...' />
+                    <Form onSubmit={this.SubmitComment} onKeyPress={this.handleKey}>
+                        <Form.Field control={TextArea} value={this.state.comment} name='comment' onChange={this.handleChange} label='Comment' placeholder='Tell us more about you...' />
                         <Button primary type='submit'>ADD COMMENT</Button>
                     </Form>
                     <div>{this.state.comment}</div>

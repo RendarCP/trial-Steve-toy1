@@ -3,7 +3,6 @@ import { Input,Feed,Icon,Search } from 'semantic-ui-react';
 import { withTracker } from 'meteor/react-meteor-data';
 import { Meteor } from 'meteor/meteor';
 import Users from '../../api/usersList';
-import _ from 'lodash';
 
 class ChatUser extends Component {
     state={

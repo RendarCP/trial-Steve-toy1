@@ -1,4 +1,5 @@
 import assert from "assert";
+import "../imports/api/posts.test.js";
 
 describe("steve-toy", function () {
   it("package.json has correct name", async function () {

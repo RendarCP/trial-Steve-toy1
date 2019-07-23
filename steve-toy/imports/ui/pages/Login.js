@@ -32,7 +32,7 @@ class Login extends Component {
             }
             else{
                 this.props.history.push('/');
-                window.location.reload();
+                // window.location.reload();
             }
         })
     }

@@ -3,6 +3,8 @@ import {Link,NavLink} from 'react-router-dom';
 import { Button } from 'semantic-ui-react';
 import { Input, Menu } from 'semantic-ui-react'
 import { Meteor } from 'meteor/meteor';
+import {withTracker} from 'meteor/react-meteor-data';
+import { METHODS } from 'http';
 class Header extends Component {
     state={
         isLoggedIn:false,
@@ -22,14 +24,13 @@ class Header extends Component {
                 this.setState({
                     isLoggedIn:true,
                 })
-                window.location.reload();
+                // window.location.reload();
             }
         });
     }
     render() {
         const isLoggedIn = this.state.isLoggedIn;
-        // console.log(isLoggedIn);
-        //const { activeItem } = this.state
+        const current = this.props.currentUser;
         return (
                 <div className="Nav">
                     <Menu secondary inverted color='blue' size="huge">
@@ -46,11 +47,11 @@ class Header extends Component {
                             <Menu.Menu position='right'>
                             {Meteor.userId() ? (<Link to={`/userinfo/${Meteor.userId()}`}><Button basic inverted className="loginButton">UserInfo</Button></Link>
                             ): null}
-                            { !Meteor.userId() ? (
+                            { !current._id ? (
                             <Link to="/login"><Button basic inverted className="loginButton">LOG IN</Button></Link>):
                                 (<Button basic inverted onClick={this.logOut}>Log Out</Button>  )
                             }
-                            { !Meteor.userId()?(
+                            { !current._id?(
                                 <Link to="/signup"><Button basic inverted className="signUpButton">SIGN UP</Button></Link>
                             ): null}
                         </Menu.Menu>
@@ -60,4 +61,8 @@ class Header extends Component {
     }
 }
 
-export default Header;
+export default withTracker(()=>{
+    return {
+    currentUser:Meteor.user() || {}
+    }
+})(Header);

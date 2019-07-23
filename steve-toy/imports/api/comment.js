@@ -19,9 +19,12 @@ Meteor.methods({
             postId,
             comments,
             createdAt: new Date(),
-            // createdAt: moment().format('llll'),
+             //createdAt: moment().format('llll'),
             owner: this.userId,
             username:Meteor.users.findOne(this.userId).profile.userName,
         })
+    },
+    'comments.counts' (postId){
+        return Comments.find({postId}).count()
     }
 })
