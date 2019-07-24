@@ -47,7 +47,7 @@ class Chat extends Component {
                 if(chats.userId == Meteor.user()._id){
                     return  <List.Item key={chats._id}>
                                 <List.Content className="chatlist" floated='right'>
-                                    <Label.Detail>{moment(chats.createdAt).format("MMM Do YY")}</Label.Detail>
+                                    <Label.Detail>{moment(chats.createdAt).format('L')}</Label.Detail>
                                     <Label size='large' pointing='right' color='orange'>{chats.chatcontent}</Label>
                                 </List.Content>
                             </List.Item>
@@ -56,7 +56,7 @@ class Chat extends Component {
                     return  <List.Item key={chats._id}>
                                 <List.Content className="chatlistath" floated='left'>
                                     <Label size='large' pointing='left'>{chats.chatcontent}</Label>
-                                    <Label.Detail>{moment(chats.createdAt).format("MMM Do YY")}</Label.Detail>
+                                    <Label.Detail>{moment(chats.createdAt).format('L')}</Label.Detail>
                                 </List.Content>
                             </List.Item>
                 }
