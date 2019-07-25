@@ -47,6 +47,7 @@ label{
   border:1px solid black;
   background:#e3f9ff;
   border-radius: 25px;
+  color: black;
 }
 .postDetail{
   display: flex;
@@ -67,6 +68,9 @@ label{
 }
 .Posts{
   text-align: center;
+}
+.Postscontent{
+  white-space: pre-wrap;
 }
 .buttonposition{
   margin: auto;
@@ -99,5 +103,5 @@ label{
   justify-content: flex-start;
 }
 .comments{
-  font-size: 10px;
+  font-size: 12px;
 }

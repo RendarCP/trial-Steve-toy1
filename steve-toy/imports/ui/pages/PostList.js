@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { withTracker } from 'meteor/react-meteor-data';
 import Posts from '../../api/post.js';
 import { Meteor } from 'meteor/meteor';
-import { Input,Grid,Image, Segment,Button,Container,Header,Card,Icon } from 'semantic-ui-react';
+import { Card,Icon,Container } from 'semantic-ui-react';
 import {Link} from 'react-router-dom';
 import Comments from '../../api/comment.js';
 import { CLIENT_RENEG_WINDOW } from 'tls';
@@ -26,10 +26,10 @@ class Comment extends Component {
     }
 
     render() {
-        return <a> 
-        <Icon name='comment'/>
-        {this.state.result}
-        </a>
+        return  <a> 
+                <Icon name='comment'/>
+                {this.state.result}
+                </a>
     }
 }
 
@@ -38,7 +38,7 @@ class PostList extends Component {
     renderPost(){
         return this.props.posts.map((post)=>{
             if(Meteor.userId()){
-            return     <Card link key={post._id} className="PostList">
+            return      <Card link key={post._id} className="PostList">
                             <Card.Content>
                                 <Card.Header className="titleHeader"><Link to={`/post/${post._id}`}>{post.title}</Link></Card.Header>
                             <Card.Description>

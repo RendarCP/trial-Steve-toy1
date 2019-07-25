@@ -5,7 +5,31 @@ import {Link} from 'react-router-dom';
 import { Input,Grid,Card,Icon } from 'semantic-ui-react';
 import { Meteor } from 'meteor/meteor';
 
+class Comment extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            result: 0
+        };
+    }
 
+    componentDidMount() {
+        const { _id } = this.props;
+        Meteor.call('comments.counts', _id, (err, result) => {
+            if(err) {
+                return console.log(err);
+            }
+            this.setState({result});
+        });
+    }
+
+    render() {
+        return  <a> 
+                <Icon name='comment'/>
+                    {this.state.result}
+                </a>
+    }
+}
 class FavoritePost extends Component {
     renderFavorite(){
         return this.props.posts.map((posts)=>{
@@ -23,10 +47,7 @@ class FavoritePost extends Component {
                                         <Icon name='heart' className="iconMargin" />
                                         {posts.favorite.length}
                                     </a>
-                                    <a> 
-                                        <Icon name='comment'/>
-                                        33
-                                    </a>
+                                    <Comment _id={posts._id} />
                                 </Card.Content>
                             </Card>
                 }

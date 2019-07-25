@@ -121,7 +121,7 @@ class SignUp extends Component {
     render() {
         return (
             <div>
-                <h1>회원가입 화면입니다</h1>
+                <h1>SignUp</h1>
                   <Form onSubmit={this.onSubmit}>
                     {Meteor.user()? (<Form.Field>
                         <label>Email</label>

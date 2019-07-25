@@ -82,7 +82,6 @@ class PostWrite extends Component {
         // console.log(test);
         return (
             <div>
-                <h1>포스트 작성 화면입니다</h1>
                 <Form onSubmit={this.handleSubmit}>
                     <Form.Field>
                         <label>Title</label>

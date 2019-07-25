@@ -49,9 +49,9 @@ class Header extends Component {
                             ): null}
                             { !current._id ? (
                             <Link to="/login"><Button basic inverted className="loginButton">LOG IN</Button></Link>):
-                                (<Button basic inverted onClick={this.logOut}>Log Out</Button>  )
+                                (<Link><Button basic inverted onClick={this.logOut}>Log Out</Button></Link>  )
                             }
-                            { !current._id?(
+                            { !current._id? (
                                 <Link to="/signup"><Button basic inverted className="signUpButton">SIGN UP</Button></Link>
                             ): null}
                         </Menu.Menu>

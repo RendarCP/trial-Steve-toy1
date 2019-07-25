@@ -133,14 +133,14 @@ class PostDetail extends Component {
                             <Icon onClick={this.handleLike} color='red' name={this.state.heartname ? 'heart' : 'heart outline'} className="heart" size='big'/>
                         <Header className="Posts" as='h1'>{posts.title}</Header>
                         <p className="Posts">{posts.description}</p>
-                        <p>{posts.content}</p>
+                        <p className="Postscontent">{posts.content}</p>
                         {this.PostEdit()}
                     </Container>
             })
         }
         else{
-        this.props.history.push('/');
         alert("로그인이 필요합니다");
+        this.props.history.push('/');
         }
     }
     componentDidMount(){
@@ -163,7 +163,6 @@ class PostDetail extends Component {
                         <Form.Field control={TextArea} value={this.state.comment} name='comment' onChange={this.handleChange} label='Comment' placeholder='Tell us more about you...' />
                         <Button primary type='submit'>ADD COMMENT</Button>
                     </Form>
-                    <div>{this.state.comment}</div>
                     {this.renderCommentDetail()}
                 </Container>
             </div>
@@ -178,6 +177,6 @@ export default withTracker((props)=>{
     const postId = props.match.params.id
     return{
         posts:Posts.find({_id:postId}).fetch(),
-        comments:Comments.find().fetch(),
+        comments:Comments.find({},{ sort: {createdAt:-1}}).fetch(),
     }
 })(PostDetail);
