@@ -81,7 +81,6 @@ class PostWrite extends Component {
         // const test = this.props.match.url
         // console.log(test);
         return (
-            <div>
                 <Form onSubmit={this.handleSubmit}>
                     <Form.Field>
                         <label>Title</label>
@@ -107,7 +106,6 @@ class PostWrite extends Component {
                     <Button primary type='submit'>Save</Button>
                     <div className="modal">{this.state.alert}</div>
                 </Form>
-            </div>
         );
     }
 }

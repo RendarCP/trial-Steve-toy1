@@ -22,45 +22,6 @@ class ChatUser extends Component {
            search : e.target.value,
        })
     }
-    // renderUsers(){
-    //     return this.props.users.map((users)=>{
-    //         if(!users.status) {
-    //             return null;
-    //         }
-    //         return users.emails.map((emails)=>{
-    //             if(users.profile.userName == 'cho' ){
-    //                 return <Feed key={users._id}>
-    //                 <Feed.Event>
-    //                 <Feed.Label>
-    //                     <img src='https://react.semantic-ui.com/images/avatar/small/elliot.jpg' />
-    //                 </Feed.Label>
-    //                 <Feed.Content>
-    //                     <Feed.Summary>
-    //                     <Feed.User key={users._id} onClick={e=>this.props.onChange(emails.address,users.profile.phoneNumber)}>{users.profile.userName}</Feed.User>
-    //                     <Feed.Date>{users.status.online ? 'online' : 'offline'}</Feed.Date>
-    //                     </Feed.Summary>
-    //                 </Feed.Content>
-    //                 </Feed.Event>
-    //                 </Feed>
-    //             }
-    //             else{
-    //                 return <Feed key={users._id}>
-    //                 <Feed.Event>
-    //                 <Feed.Label>
-    //                     <img src='https://react.semantic-ui.com/images/avatar/small/elliot.jpg' />
-    //                 </Feed.Label>
-    //                 <Feed.Content>
-    //                     <Feed.Summary>
-    //                     <Feed.User key={users._id} onClick={e=>this.props.onChange(emails.address,users.profile.phoneNumber)}>{users.profile.userName}</Feed.User>
-    //                     <Feed.Date>{users.status.online ? 'online' : 'offline'}</Feed.Date>
-    //                     </Feed.Summary>
-    //                 </Feed.Content>
-    //                 </Feed.Event>
-    //                 </Feed>
-    //             }
-    //         })
-    //     })
-    // }
     render() {
         const mapToComponents = (data) =>{
             data.sort();
@@ -72,19 +33,19 @@ class ChatUser extends Component {
                 if(!users.status) {
                     return null;
                 }
-                return <Feed key={users._id}>
-                            <Feed.Event>
-                                <Feed.Label>
-                                    <img src='https://react.semantic-ui.com/images/avatar/small/elliot.jpg' />
-                                </Feed.Label>
-                                <Feed.Content>
-                                    <Feed.Summary>
-                                        <Feed.User key={users._id} onClick={e=>this.props.onChange(emails.address,users.profile.phoneNumber)}>{users.profile.userName}</Feed.User>
-                                        <Feed.Date>{users.status.online ? 'online' : 'offline'}</Feed.Date>
-                                    </Feed.Summary>
-                                </Feed.Content>
-                            </Feed.Event>
-                        </Feed>
+                    return <Feed key={users._id}>
+                                <Feed.Event>
+                                    <Feed.Label>
+                                        <img src='https://react.semantic-ui.com/images/avatar/large/steve.jpg' />
+                                    </Feed.Label>
+                                    <Feed.Content>
+                                        <Feed.Summary>
+                                            <Feed.User key={users._id} onClick={e=>this.props.onChange(emails.address,users.profile.phoneNumber)}>{users.profile.userName}</Feed.User>
+                                            <Feed.Date>{users.status.online ? 'online' : 'offline'}</Feed.Date>
+                                        </Feed.Summary>
+                                    </Feed.Content>
+                                </Feed.Event>
+                            </Feed>
                 })
             })
         }

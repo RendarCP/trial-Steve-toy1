@@ -14,7 +14,7 @@ body {
   padding:10px;
   display: flex;
   flex-direction: row;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   flex:0 0 100%;
 }
 .chatList{ /* chat리스트부분  */

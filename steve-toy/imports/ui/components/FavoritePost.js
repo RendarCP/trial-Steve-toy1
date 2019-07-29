@@ -22,7 +22,6 @@ class Comment extends Component {
             this.setState({result});
         });
     }
-
     render() {
         return  <a> 
                 <Icon name='comment'/>
@@ -68,6 +67,6 @@ class FavoritePost extends Component {
 export default withTracker(()=>{
     const test = Meteor.subscribe('posts.favorites');
     return{
-        posts:Posts.find().fetch()
+        posts:Posts.find({},{ $sort: {createdAt:-1}}).fetch()
     }
 })(FavoritePost);

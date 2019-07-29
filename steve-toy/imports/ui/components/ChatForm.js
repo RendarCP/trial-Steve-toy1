@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Input,List, Image,Button,Form, TextArea,Grid } from 'semantic-ui-react'
+import { Container } from 'semantic-ui-react'
 import ChatUser from '../pages/ChatUser';
 import Chat from '../pages/Chat';
 import DetailUser from '../components/DetailUser';
@@ -19,13 +19,9 @@ class ChatForm extends Component {
     render() {
         return (
             <div className="chatForm">
-                <div className="chatList">
-                    <ChatUser onChange={this.userForm}/>
-                </div>
-                    <DetailUser email={this.state.email} phone={this.state.phoneNumber}/>
-                <div className="chatting">
-                    <Chat/>
-                </div>
+                <ChatUser onChange={this.userForm}/>
+                <DetailUser email={this.state.email} phone={this.state.phoneNumber}/>
+                <Chat/>
             </div>
         );
     }

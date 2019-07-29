@@ -10,21 +10,19 @@ import Home from '../components/Home.js';
 
 const App = () => (
   <div>
-    <div>
-    <Router>
-      <Headers/>
-            <Switch>
-              <Route path="/postwrite" component={postwrite}/>
-              <Route exact path="/" component={Home}/>
-              <Route path="/login" component={login}/>
-              <Route path="/signup" component={signup}/>
-              <Route path="/post/:id" component={postdetail}/>
-              <Route path="/postupdate/:id" component={postwrite}/>
-              <Route path="/favorite" component={favoritepost}/>
-              <Route path="/userinfo/:id" component={signup}/>
-            </Switch>
-    </Router>
-    </div>
+      <Router>
+          <Headers/>
+              <Switch>
+                <Route path="/postwrite" component={postwrite}/>
+                <Route exact path="/" component={Home}/>
+                <Route path="/login" component={login}/>
+                <Route path="/signup" component={signup}/>
+                <Route path="/post/:id" component={postdetail}/>
+                <Route path="/postupdate/:id" component={postwrite}/>
+                <Route path="/favorite" component={favoritepost}/>
+                <Route path="/userinfo/:id" component={signup}/>
+              </Switch>
+      </Router>
   </div>
 );
 

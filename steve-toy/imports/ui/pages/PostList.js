@@ -38,7 +38,7 @@ class PostList extends Component {
     renderPost(){
         return this.props.posts.map((post)=>{
             if(Meteor.userId()){
-            return      <Card link key={post._id} className="PostList">
+            return  <Card link key={post._id} className="PostList">
                             <Card.Content>
                                 <Card.Header className="titleHeader"><Link to={`/post/${post._id}`}>{post.title}</Link></Card.Header>
                             <Card.Description>
@@ -76,9 +76,11 @@ class PostList extends Component {
     
     render() {
         return (
-                <Card.Group itemsPerRow={5}>
+            <Container>
+                <Card.Group itemsPerRow={4}>
                     {this.renderPost()}
                 </Card.Group>
+            </Container>
 
         );
     }
