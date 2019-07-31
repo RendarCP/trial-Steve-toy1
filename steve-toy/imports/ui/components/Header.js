@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
-import {Link,NavLink} from 'react-router-dom';
+import {Link,} from 'react-router-dom';
 import { Button } from 'semantic-ui-react';
-import { Input, Menu, Icon } from 'semantic-ui-react'
+import {  Menu, Icon } from 'semantic-ui-react'
 import { Meteor } from 'meteor/meteor';
 import {withTracker} from 'meteor/react-meteor-data';
-import { METHODS } from 'http';
 class Header extends Component {
     state={
         isLoggedIn:false,
