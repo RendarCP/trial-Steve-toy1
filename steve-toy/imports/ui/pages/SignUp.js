@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { Button, Form, Icon ,Message} from 'semantic-ui-react';
 import {Link} from 'react-router-dom';
 import { Accounts } from 'meteor/accounts-base';
-import { createContainer } from 'meteor/react-meteor-data';
 import { Meteor } from 'meteor/meteor';
 import {withTracker} from 'meteor/react-meteor-data';
 class SignUp extends Component {
