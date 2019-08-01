@@ -1,5 +1,5 @@
-export { default as login } from './Login.js';
-export { default as signup } from './SignUp.js';
-export { default as postwrite } from './PostWrite.js';
-export { default as postdetail } from '../containers/PostDetail';
-export { default as favoriteposts } from '../containers/FavoritePosts.js';
+export { default as Login } from './Login.js';
+export { default as Signup } from './SignUp.js';
+export { default as Postwrite } from './PostWrite.js';
+export { default as Postdetail } from '../containers/PostDetail';
+export { default as Favoriteposts } from '../containers/FavoritePosts.js';

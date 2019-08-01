@@ -4,7 +4,7 @@ import Headers from '../components/Header.js';
 import { BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 // import login from '../pages/Login';
 // import signup from '../pages/SignUp';
-import {login , signup,postwrite,postdetail,favoriteposts} from '../pages/index.js';
+import { Login , Signup, Postwrite, Postdetail, Favoriteposts } from '../pages/index.js';
 import Home from '../components/Home.js';
 
 const App = () => (
