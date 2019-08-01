@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import {Link,} from 'react-router-dom';
 import { Button } from 'semantic-ui-react';
 import {  Menu, Icon } from 'semantic-ui-react'
 import { Meteor } from 'meteor/meteor';
@@ -35,23 +34,23 @@ class Header extends Component {
                     <Menu secondary inverted color='blue' size="huge">
                         <Menu.Menu position='left'>
                             { Meteor.userId() ? (
-                            <Link to="/postWrite"><Button basic inverted>Blog Write</Button></Link>
+                            <a><Button basic inverted>Blog Write</Button></a>
                             ): null}
-                        {/* <Link to="/postWrite"><Button>Blog Write</Button></Link> */}
+                        {/* <a to="/postWrite"><Button>Blog Write</Button></a> */}
                             { Meteor.userId() ? (
-                            <Link to="/favorite"><Button basic inverted>Favorite</Button></Link>
+                            <a to="/favorite"><Button basic inverted>Favorite</Button></a>
                             ): null}
                         </Menu.Menu>
-                            <Link to="/" className="mainButton"><Icon name='apple' />Steve Toy Project</Link>
+                            <a to="/" className="mainButton"><Icon name='apple' />Steve Toy Project</a>
                             <Menu.Menu position='right'>
-                            {Meteor.userId() ? (<Link to={`/userinfo/${Meteor.userId()}`}><Button basic inverted className="loginButton">UserInfo</Button></Link>
+                            {Meteor.userId() ? (<a to={`/userinfo/${Meteor.userId()}`}><Button basic inverted className="loginButton">UserInfo</Button></a>
                             ): null}
                             { !current._id ? (
-                            <Link to="/login"><Button basic inverted className="loginButton">LOG IN</Button></Link>):
-                                (<Link to="/"><Button basic inverted onClick={this.logOut}>Log Out</Button></Link>  )
+                            <a to="/login"><Button basic inverted className="loginButton">LOG IN</Button></a>):
+                                (<a to="/"><Button basic inverted onClick={this.logOut}>Log Out</Button></a>  )
                             }
                             { !current._id? (
-                                <Link to="/signup"><Button basic inverted className="signUpButton">SIGN UP</Button></Link>
+                                <a to="/signup"><Button basic inverted className="signUpButton">SIGN UP</Button></a>
                             ): null}
                         </Menu.Menu>
                     </Menu>

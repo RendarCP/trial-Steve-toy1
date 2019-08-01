@@ -23,3 +23,4 @@ aldeed:simple-schema
 momentjs:moment
 mizzao:user-status
 meteortesting:mocha
+kadira:flow-router
