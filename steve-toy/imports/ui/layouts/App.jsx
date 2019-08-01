@@ -2,13 +2,15 @@ import React from 'react';
 import Headers from '../components/Header.js';
 // import Postlist from '../components/PostList.js';
 import { BrowserRouter as Router, Route, Switch} from 'react-router-dom';
-import { login , signup, postwrite, postdetail, favoriteposts } from '../pages/index.js';
+// import login from '../pages/Login';
+// import signup from '../pages/SignUp';
+import {login , signup,postwrite,postdetail,favoriteposts} from '../pages/index.js';
 import Home from '../components/Home.js';
 
 const App = () => (
   <div>
     <Router>
-      <Headers />
+      <Headers/>
         <Switch>
           <Route path="/postwrite" component={postwrite}/>
           <Route exact path="/" component={Home}/>

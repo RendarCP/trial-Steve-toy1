@@ -43,11 +43,11 @@ Meteor.methods({
         }
         Posts.update(postId,{$set:{title: title, description:description,content:content}})
     },
-    'post.favorite' (postId, favorite) {
+    'post.favorite' (postId, favorite){
         const posts = Posts.findOne(postId);
-        Posts.update(postId, { $addToSet: { favorite } })
+        Posts.update(postId,{ $addToSet : {favorite}})
     },
-    'post.favorite.remove' (postId, favorite) {
-        Posts.update(postId, { $pull: { favorite } })
+    'post.favorite.remove' (postId, favorite){
+        Posts.update(postId,{ $pull : {favorite}})
     },
 })

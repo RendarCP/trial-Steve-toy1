@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { Button, Form, Icon ,Message} from 'semantic-ui-react';
 import {Link} from 'react-router-dom';
 import { Accounts } from 'meteor/accounts-base';
-import { createContainer } from 'meteor/react-meteor-data';
 import { Meteor } from 'meteor/meteor';
 import {withTracker} from 'meteor/react-meteor-data';
 class SignUp extends Component {
@@ -53,65 +52,71 @@ class SignUp extends Component {
         <div className="modal">패스워드가 일치하지 않습니다</div>
       )
     }
-  }
-  onSubmit=(e)=>{
-    e.preventDefault();
-    const email = this.state.email;
-    const password = this.state.password;
-    const userName = this.state.userName;
-    const phoneNumber = this.state.PhoneNumber;
-
-    if(this.props.match.path == '/signup') {
-      Accounts.createUser({
-        email,
-        password,
-        profile: { userName, phoneNumber }
-      }, (err) => {
-          if(err) {
-            this.setState({
-                error:{none:err.reason},
-            });
-          } else {
-            this.props.history.push('/login');
-          }
-      });
-    } else {
-      return Meteor.user().emails.map((emails)=>{
-        const newPassword = this.state.newPassword;
-        
-        Accounts.changePassword(password, newPassword, (err) => {
-          if(err){
-            this.setState({
-                error:{none:err.reason},
-            })
-          } else {
-            this.props.history.push('/login');
-          }
-        });
-
-        Meteor.users.update(Meteor.userId(),
-          {
-            $set: {
+    onSubmit=(e)=>{
+      e.preventDefault();
+      const email = this.state.email;
+      const password = this.state.password;
+      const userName = this.state.userName;
+      const phoneNumber = this.state.PhoneNumber;
+      if(this.props.match.path == '/signup'){
+          Accounts.createUser({
+              email,
+              password,
               profile:{
-                userName:userName,
-                phoneNumber:phoneNumber,
+                  userName,
+                  phoneNumber,
               }
-            }
-          }
-        );
-      })
+  
+          }, (err)=>{
+              if(err){
+                  this.setState({
+                      error:{none:err.reason},
+                  });
+              }
+              else{
+                  this.props.history.push('/login');
+              }
+          });
+      }
+      else{
+        return Meteor.user().emails.map((emails)=>{
+          const newPassword = this.state.newPassword;
+          Accounts.changePassword(
+            password,
+            newPassword,
+          (err)=>{
+              if(err){
+                this.setState({
+                  error:{none:err.reason},
+                })
+              }
+              else{
+                this.props.history.push('/login');
+              }
+          })
+          Meteor.users.update(
+            Meteor.userId(),
+            {
+              $set:{
+                profile:{
+                  userName:userName,
+                  phoneNumber:phoneNumber,
+                }
+              }
+            }  
+          )
+        })
+      }
     }
-  }
-
   componentDidMount() {
     if(Meteor.user()) {
       const { address } = this.props.userinfo.emails[0];
-      const { userName, phoneNumber } =this.props.userinfo.profile;
+      const { userName, phoneNumber } = this.props.userinfo.profile;
 
       this.setState({
         email: address,
         userName,
-        phoneNumber
+        PhoneNumber: phoneNumber,
       });
     }
   }
@@ -119,61 +124,67 @@ class SignUp extends Component {
     return (
       <div>
         <h1>SignUp</h1>
-          <Form onSubmit={this.onSubmit}>
-            {Meteor.user() ? (<Form.Field>
+        <Form onSubmit={this.onSubmit}>
+          {Meteor.user()? (
+            <Form.Field>
               <label>Email</label>
               <input disabled placeholder='sample@mail.com'
                 type="email"
                 name="email"
                 readOnly="readonly"
                 value={this.state.email}
+                onChange={this.handleChage}
+              />
+            </Form.Field>) : (
+            <Form.Field>
+              <label>Email</label>
+              <input placeholder='sample@mail.com'
+                type="email"
+                name="email"
+                value={this.state.email}
                 onChange={this.handleChage}/>
-            </Form.Field>) : (<Form.Field>
-                <label>Email</label>
-                <input placeholder='sample@mail.com'
-                  type="email"
-                  name="email"
-                  value={this.state.email}
-                  onChange={this.handleChage}/>
             </Form.Field>)}
             <Form.Field>
-                <label>Name</label>
-                <input placeholder='Name' 
-                  name="userName"
-                  value={this.state.userName}
-                  onChange={this.handleChage}/>
+              <label>Name</label>
+              <input placeholder='Name' 
+                name="userName"
+                value={this.state.userName}
+                onChange={this.handleChage}/>
             </Form.Field>
             <Form.Field>
-                <label>Password</label>
-                <input placeholder='Password'
-                  //onChange={e=>this.handleOnPasswordInput(e.target.value)} />
-                  type="password"
-                  name="password"
-                  onChange={this.handleOnPasswordInput}/>
+              <label>Password</label>
+              <input placeholder='Password'
+                type="password"
+                name="password"
+                onChange={this.handleOnPasswordInput}
+              />
             </Form.Field>
-            {Meteor.user() ? (<Form.Field>
+            {Meteor.user() ? (
+              <Form.Field>
                 <label>New Password</label>
                 <input placeholder='Password'
-                  //onChange={e=>this.handleOnPasswordInput(e.target.value)} />
                   type="Password"
                   name="newPassword"
-                  onChange={this.handleOnNewPasswordInput}/>
-            </Form.Field>) : null}
+                  onChange={this.handleOnNewPasswordInput}
+                />
+              </Form.Field>) : null}
             <Form.Field>
               <label>Password Confirm</label>
               <input 
                 placeholder='Password Confirm'
-                type="password"
+                type="password" 
                 onChange={this.handleOnCofirmPasswordInput}
               />
             </Form.Field>
             {Meteor.user() ? this.renderNewFeedbackMessage() : this.renderFeedbackMessage()}
             <Form.Field>
               <label>Phone Number</label>
-              <input placeholder='Phone'
+              <input
+                placeholder='Phone'
                 name="PhoneNumber" 
                 value={this.state.PhoneNumber}
-                onChange={this.handleChage}/>
+                onChange={this.handleChage}
+              />
             </Form.Field>
             <div className="buttonposition">
               <Button basic><Link to="/">Cancel</Link></Button>
@@ -185,8 +196,8 @@ class SignUp extends Component {
   }
 }
 
-export default withTracker(()=>{
-    return{
-        userinfo:Meteor.user()
-    }
-})(SignUp);
+// export default withTracker(()=> {
+//   return {
+//     userinfo: Meteor.user()
+//   };
+// })(SignUp);
