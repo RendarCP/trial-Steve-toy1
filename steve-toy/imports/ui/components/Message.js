@@ -21,6 +21,7 @@ export default function Mesaage(props) {
       </List.Content>
     );
   }
+  
   return(
     <List.Item>
       {validateUser()}

@@ -3,7 +3,7 @@ import CardView from './CardView.js';
 import {Container,Card} from 'semantic-ui-react';
 
 export default function PostCardLists(props){
-  const {posts} = props;
+  const { posts } = props;
   return (
     <Container>
       <Card.Group itemsPerRow={4}>

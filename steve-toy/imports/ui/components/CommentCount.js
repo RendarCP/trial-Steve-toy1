@@ -11,20 +11,20 @@ class CommentCount extends Component {
   }
 
   componentDidMount() {
-      const { _id } = this.props;
-      Meteor.call('comments.counts', _id, (err, result) => {
-          if(err) {
-              return console.log(err);
-          }
-          this.setState({result});
-      });
+    const { _id } = this.props;
+    Meteor.call('comments.counts', _id, (err, result) => {
+      if(err) {
+        return console.log(err);
+      }
+      this.setState({ result });
+    });
   }
 
   render() {
-      return ( 
-        <a> 
-          <Icon name='comment'/>{this.state.result}
-        </a>
+    return ( 
+      <a> 
+        <Icon name='comment'/>{this.state.result}
+      </a>
     );
   }
 }

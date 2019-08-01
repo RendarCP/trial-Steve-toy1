@@ -6,7 +6,7 @@ export default function Hoc(ContentOne, ContentTwo) {
     render() {
       return (
         <div>
-          <Header />>
+          <Header />
           <ContentOne />
           {ContentTwo ? <ContentTwo /> : null}
         </div>

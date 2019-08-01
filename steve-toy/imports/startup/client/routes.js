@@ -1,61 +1,51 @@
-import React from 'react';
 import { mount } from 'react-mounter';
-
-import MainLayout from '../../ui/layouts/mainlayout'
-
-import { Login , Signup, Postwrite, Postdetail, Favoriteposts } from '../../ui/pages/index';
-import Profile from '../../ui/components/Profile';
-
-function Ha() {
-  return <div>ha</div>
-};
-
+import { Home, Login , Signup, PostWrite, PostDetail, Favorites } from '../../ui/pages/index';
 
 FlowRouter.route('/',{
   name:'home',
   action: function() {
-    mount(MainLayout, {ContentOne: }) 
+    mount(Home) 
   }
 })
 FlowRouter.route('/login',{
   name:'login',
   action: function() {
-    mount(Profile, {email: "test@test.com", phone: "030030030"}) 
+    mount(Login) 
   }
 })
 FlowRouter.route('/signup',{
   name:'signup',
   action: function() {
-    mount(Profile, {email: "test@test.com", phone: "030030030"}) 
+    mount(Signup) 
   }
 })
 FlowRouter.route('/useredit/:id',{
   name:'useredit',
   action: function() {
-    mount(Profile, {email: "test@test.com", phone: "030030030"}) 
+    mount(Signup) 
   }
 })
 FlowRouter.route('/postwrite',{
   name:'postwrite',
   action: function() {
-    mount(Profile, {email: "test@test.com", phone: "030030030"}) 
+    mount(PostWrite) 
   }
 })
 FlowRouter.route('/postedit/:id',{
   name:'postedit',
   action: function() {
-    mount(Profile, {email: "test@test.com", phone: "030030030"}) 
+    mount(PostWrite)
   }
 })
 FlowRouter.route('/post/:id',{
   name:'postdetail',
   action: function() {
-    mount(Profile, {email: "test@test.com", phone: "030030030"}) 
+    mount(PostDetail) 
   }
 })
 FlowRouter.route('/favorite',{
   name:'favorite',
   action: function() {
-    mount(Profile, {email: "test@test.com", phone: "030030030"}) 
+    mount(Favorites) 
   }
 })

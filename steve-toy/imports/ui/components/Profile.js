@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { Card,extra } from 'semantic-ui-react';
+import { Card, extra } from 'semantic-ui-react';
 
 export default function Profile(props) {
-  const { email,phone } = props;
+  const { email, phone } = props;
   return(
     <div className='chatProfile'>
       <Card
