@@ -1,30 +1,29 @@
 import React, { Component } from 'react';
-import { Container } from 'semantic-ui-react'
-import ChatUser from '../pages/ChatUser';
-import Chat from '../pages/Chat';
-import DetailUser from '../components/DetailUser';
+import { Container } from 'semantic-ui-react';
+import Profile from './Profile';
+
+import Chat from '../conatainers/Chat';
+import UserLists from '../conatainers/UserLists';
+
 class ChatForm extends Component {
-    state={
-        email:'',
-        phoneNumber:'',
-    }
-    userForm=(email,phoneNumber)=>{
-        // console.log 
-        this.setState({
-            email: email,
-            phoneNumber: phoneNumber,
-        })
-    }
-    // email={this.state.email} phone={this.state.phoneNumber}
-    render() {
-        return (
-            <div className="chatForm">
-                <ChatUser onChange={this.userForm}/>
-                <DetailUser email={this.state.email} phone={this.state.phoneNumber}/>
-                <Chat/>
-            </div>
-        );
-    }
+  state = {
+    email:'',
+    phoneNumber:'',
+  }
+
+  selectUser = (email, phoneNumber) => {
+    this.setState({ email, phoneNumber });
+  }
+
+  render() {
+    return (
+      <div className="chatForm">
+        <UserLists selectUser={this.selectUser} />
+        <Profile email={this.state.email} phone={this.state.phoneNumber} />
+        <Chat/>
+      </div>
+    );
+  }
 }
 
 export default ChatForm;

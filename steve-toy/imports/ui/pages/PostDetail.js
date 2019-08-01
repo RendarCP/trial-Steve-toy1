@@ -3,17 +3,14 @@ import {Container,Header,TextArea,Form,Button,Icon,Card} from 'semantic-ui-react
 import {withTracker} from 'meteor/react-meteor-data';
 import { Meteor } from 'meteor/meteor';
 import Posts from '../../api/post.js';
-import PostList from '../pages/PostList.js';
 import {Link} from 'react-router-dom';
-import { Match } from 'meteor/check';
 import Comments from '../../api/comment.js';
 import 'moment';
 
 class PostDetail extends Component {
-    state={
-        favoriteLike:false,
-        heartname:false,
-        comment:'',
+    state = {
+      heartname: false,
+      comment: ''
     }
     handleChange=(e)=>{
         this.setState({
@@ -126,29 +123,29 @@ class PostDetail extends Component {
             }
         })
     }
-    renderPostDetail(){      
-        if(Meteor.userId()){
-        return this.props.posts.map((posts)=>{
-            return <Container key={posts._id} text style={{ marginTop: '7em' }}>
-                            <Icon onClick={this.handleLike} color='red' name={this.state.heartname ? 'heart' : 'heart outline'} className="heart" size='big'/>
-                        <Header className="Posts" as='h1'>{posts.title}</Header>
-                        <p className="Posts">{posts.description}</p>
-                        <p className="Postscontent">{posts.content}</p>
-                        {this.PostEdit()}
-                    </Container>
-            })
-        }
-        else{
-        alert("로그인이 필요합니다");
-        this.props.history.push('/');
-        }
+  renderPostDetail = () => {      
+    if(Meteor.userId()) {
+      const { posts } = this.props;
+      return (
+        <Container key={posts._id} text style={{ marginTop: '7em' }}>
+          <Icon onClick={this.handleLike} color='red' name={this.state.heartname ? 'heart' : 'heart outline'} className="heart" size='big'/>
+          <Header className="Posts" as='h1'>{posts.title}</Header>
+          <p className="Posts">{posts.description}</p>
+          <p className="Postscontent">{posts.content}</p>
+          {this.PostEdit()}
+        </Container>
+      );
+    } else {
+      alert("로그인이 필요합니다");
+      this.props.history.push('/');
     }
+  }
     componentDidMount(){
         return this.props.posts.map((posts)=>{
             return posts.favorite.map((favorites)=>{
                 if(favorites == Meteor.user()._id){
                     this.setState({
-                        heartname:true,
+                        heartname: true,
                     })
                 }
             })
@@ -171,12 +168,13 @@ class PostDetail extends Component {
 }
 
 export default withTracker((props)=>{
-    Meteor.subscribe('post');
-    Meteor.subscribe('comments');
-    // console.log(ready);
-    const postId = props.match.params.id
-    return{
-        posts:Posts.find({_id:postId}).fetch(),
-        comments:Comments.find({},{ sort: {createdAt:-1}}).fetch(),
-    }
+  Meteor.subscribe('post');
+  Meteor.subscribe('comments');
+
+  const postId = props.match.params.id
+  
+  return {
+    posts: Posts.find({_id: postId}).fetch()[0],
+    comments:Comments.find({},{ sort: {createdAt:-1}}).fetch(),
+  }
 })(PostDetail);

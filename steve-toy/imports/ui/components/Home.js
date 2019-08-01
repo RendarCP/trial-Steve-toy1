@@ -1,18 +1,16 @@
 import React, { Component } from 'react';
 import ChatForm from './ChatForm';
-import List from '../pages/PostList';
-import PostDetail from '../pages/PostDetail.js';
-import { Meteor } from 'meteor/meteor';
+import PostCardLists from '../containers/PostCardLists';
 
 class Home extends Component {
-    render() {
-        return (
-            <div>
-                <ChatForm/>
-                <List/>
-            </div>
-        );
-    }
+  render() {
+    return (
+      <div>
+        <ChatForm />
+        <PostCardLists />
+      </div>
+    );
+  }
 }
 
 export default Home;
