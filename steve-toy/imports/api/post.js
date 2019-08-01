@@ -20,22 +20,6 @@ if(Meteor.isServer) {
     })
     
 }
-// if(Meteor.isClient){
-//     Meteor.subscribe('post',function(){
-//         return Posts.find();
-//     })
-// }
-
-// const setSchema =Posts.schema = new SimpleSchema({
-//     title:{type:String},
-//     description:{type:String},
-//     content:{type:String},
-//     createdAt:{type:String},
-//     owner:{type:String},
-//     username:{type:String}
-// })
-
-// Posts.attachSchema((setSchema));
 
 Meteor.methods({
     'post.insert' (title,description,content){
@@ -59,11 +43,11 @@ Meteor.methods({
         }
         Posts.update(postId,{$set:{title: title, description:description,content:content}})
     },
-    'post.favorite' (postId,favorite){
+    'post.favorite' (postId, favorite){
         const posts = Posts.findOne(postId);
-        Posts.update(postId,{$addToSet:{favorite:favorite}})
+        Posts.update(postId,{ $addToSet : {favorite}})
     },
-    'post.favoirte.remove' (postId,favorite){
-        Posts.update(postId,{$pull:{favorite:favorite}})
+    'post.favorite.remove' (postId, favorite){
+        Posts.update(postId,{ $pull : {favorite}})
     },
 })

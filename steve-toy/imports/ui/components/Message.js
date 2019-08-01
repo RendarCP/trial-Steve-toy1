@@ -7,7 +7,6 @@ export default function Mesaage(props) {
 
   function validateUser() {
     if(userId === Meteor.userId()){
-      console.log('?')
       return(
         <List.Content className="chatlist" floated='right'>
           <Label.Detail>{moment(createdAt).format('L')}</Label.Detail>
@@ -15,7 +14,6 @@ export default function Mesaage(props) {
         </List.Content>
       );
     }
-    console.log('!')
     return(
       <List.Content className="chatlistath" floated='left'>
         <Label size='large' pointing='left'>{chatcontent}</Label>
