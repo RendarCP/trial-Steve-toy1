@@ -1,7 +1,7 @@
-import { Card } from 'semantic-ui-react';
+import { Card } from 'semantic-ui-react'
 
-export default function PostComment(props) {
-  const { username, createdAt, comments } = props;
+export default PostComment = (props) => 
+  { username, createdAt, comments } = props
   
   return(
     <Card fluid color='red'>
@@ -9,5 +9,5 @@ export default function PostComment(props) {
       <Card.Meta><p className='comments'>{moment(createdAt).fromNow()}</p></Card.Meta>
       <Card.Content>{comments}</Card.Content>
     </Card>
-  );
-}
+  )
+
