@@ -2,7 +2,7 @@ import React from 'react';
 import { Card } from 'semantic-ui-react';
 
 export default function PostComment(props) {
-  const { username,createdAt,comments } = props;
+  const { username, createdAt, comments } = props;
   
   return(
     <Card fluid color='red'>

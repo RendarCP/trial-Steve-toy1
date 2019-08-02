@@ -49,3 +49,10 @@ FlowRouter.route('/favorite',{
     mount(Favorites) 
   }
 })
+import Test from '../../ui/containers/PostCardLists'
+FlowRouter.route('/test',{
+  name:'test',
+  action: function() {
+    mount(Test) 
+  }
+})

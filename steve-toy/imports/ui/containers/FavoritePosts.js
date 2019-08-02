@@ -1,6 +1,6 @@
 import { withTracker } from 'meteor/react-meteor-data';
 import PostCardLists from '../components/PostCardLists';
-import Posts from '../../api/post';
+import Posts from '../../api/post/post';
 
 export default withTracker(()=>{
   Meteor.subscribe('posts.favorites');

@@ -1,19 +1,20 @@
 import React, { Component } from 'react';
-import {Container, Header, TextArea, Form, Button, Icon } from 'semantic-ui-react';
+import { Container, Header, TextArea, Form, Button, Icon } from 'semantic-ui-react';
 import { Meteor } from 'meteor/meteor';
 import 'moment';
 
+import { observable } from 'mobx';
+import { observer } from 'mobx-react';
+
 import PostComment from './PostComment';
 
-export default class PostDetail extends Component {
-  state = {
+export default observer(class PostDetail extends Component {
+  state = observable({
     comment:'',
-  };
+  });
 
   handleChange = (e) => {
-    this.setState({
-      comment : e.target.value,
-    })
+    this.state.comment = e.target.value
   }
 
   handleLike = (e) => {
@@ -37,19 +38,17 @@ export default class PostDetail extends Component {
   }
 
   SubmitComment = (e) => {
-    const Comment = this.state.comment;
+    const comment = this.state.comment;
     const postsId = FlowRouter.getParam('id');
     
-    if(!Comment.trim()){
+    if(!comment.trim()){
       alert('댓글을 입력하셔야됩니다');
     } else {
-      Meteor.call('comments.insert', postsId, Comment, (err) => {
+      Meteor.call('comments.insert', postsId, comment, (err) => {
         if(err){
           console.log(err);
         } else {
-          this.setState({
-            comment:''
-          });
+          this.state.comment = '';
         }
       });
     }
@@ -106,4 +105,4 @@ export default class PostDetail extends Component {
       </div>
     );
   }
-}
+});

@@ -3,15 +3,16 @@ import { Input,List, Button, Form } from 'semantic-ui-react';
 import { Meteor } from 'meteor/meteor';
 import Message from '../components/Message';
 
-export default class Chat extends Component {
-  state = {
-    chatting:'',
-  }
+import { observable } from 'mobx';
+import { observer } from 'mobx-react';
+
+export default observer(class Chat extends Component {
+  state = observable({
+    chatting: '',
+  });
 
   handleChange = (e) => {
-    this.setState({
-      chatting: e.target.value
-    });
+    this.state.chatting = e.target.value
   }
 
   submitChat = (e) => {
@@ -26,9 +27,7 @@ export default class Chat extends Component {
         if(err){
           console.log(err);
         } else {
-          this.setState({
-              chatting:'',
-          });
+          this.state.chatting = '';
         }
       });
     }
@@ -61,4 +60,4 @@ export default class Chat extends Component {
       </div>
     );
   }
-}
+});

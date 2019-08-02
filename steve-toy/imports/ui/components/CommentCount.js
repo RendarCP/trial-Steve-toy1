@@ -1,14 +1,12 @@
 import React, {Component} from 'react';
 import { Icon } from 'semantic-ui-react';
-
+import { observable } from 'mobx';
+import { observer } from 'mobx-react';
 
 class CommentCount extends Component {
-  constructor(props) {
-      super(props);
-      this.state = {
-          result: 0
-      };
-  }
+    state = observable({
+      result: 0
+    });
 
   componentDidMount() {
     const { _id } = this.props;
@@ -16,7 +14,7 @@ class CommentCount extends Component {
       if(err) {
         return console.log(err);
       }
-      this.setState({ result });
+      this.state.result = result;
     });
   }
 
@@ -29,4 +27,4 @@ class CommentCount extends Component {
   }
 }
 
-export default CommentCount;
+export default observer(CommentCount);

@@ -3,15 +3,18 @@ import React, { Component } from 'react';
 import Profile from './Profile';
 import Chat from '../containers/Chat';
 import UserLists from '../containers/UserLists';
+import { observable } from 'mobx';
+import { observer } from 'mobx-react';
 
 class ChatForm extends Component {
-  state = {
-    email:'',
-    phoneNumber:'',
-  }
+  state = observable({
+    email: '',
+    phoneNumber: '',
+  });
 
   selectUser = (email, phoneNumber) => {
-    this.setState({ email, phoneNumber });
+    this.state.email = email;
+    this.state.phoneNumber = phoneNumber;
   }
 
   render() {
@@ -25,4 +28,4 @@ class ChatForm extends Component {
   }
 }
 
-export default ChatForm;
+export default observer(ChatForm);

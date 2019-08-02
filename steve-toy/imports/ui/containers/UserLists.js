@@ -6,6 +6,6 @@ export default withTracker(() => {
   
   return {
     isReady: usersSub.ready(),
-    users:Meteor.users.find().fetch(),
+    users: Meteor.users.find().fetch(),
   };
 })(UserLists);

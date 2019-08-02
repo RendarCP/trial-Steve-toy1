@@ -3,7 +3,7 @@ import { List,Label } from 'semantic-ui-react';
 import { Meteor } from 'meteor/meteor';
 
 export default function Mesaage(props) {
-  const { createdAt, chatcontent, userId} = props;
+  const { createdAt, chatcontent, userId } = props;
 
   function validateUser() {
     if(userId === Meteor.userId()){
