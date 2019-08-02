@@ -1,8 +1,6 @@
-import React, { Component } from 'react';
 import { Button } from 'semantic-ui-react';
-import {  Menu, Icon } from 'semantic-ui-react'
+import { Menu, Icon } from 'semantic-ui-react'
 import { Meteor } from 'meteor/meteor';
-import {withTracker} from 'meteor/react-meteor-data';
 
 class Header extends Component {
   logOut = () => {

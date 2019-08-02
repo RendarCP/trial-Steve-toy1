@@ -1,9 +1,5 @@
-import React, { Component } from 'react';
 import { Button, Form } from 'semantic-ui-react';
 import { Meteor } from 'meteor/meteor';
-
-import { observable } from 'mobx';
-import { observer } from 'mobx-react';
 
 export default observer(class Login extends Component {
   state = observable({

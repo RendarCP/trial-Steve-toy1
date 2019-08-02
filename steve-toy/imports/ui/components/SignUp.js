@@ -1,9 +1,6 @@
-import React, { Component } from 'react';
 import { Button, Form } from 'semantic-ui-react';
 import { Accounts } from 'meteor/accounts-base';
 import { Meteor } from 'meteor/meteor';
-import { observable } from 'mobx';
-import { observer } from 'mobx-react';
 
 export default observer(class SignUp extends Component {
   state = observable({

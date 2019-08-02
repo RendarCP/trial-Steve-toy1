@@ -1,7 +1,4 @@
-import React, {Component} from 'react';
 import { Icon } from 'semantic-ui-react';
-import { observable } from 'mobx';
-import { observer } from 'mobx-react';
 
 class CommentCount extends Component {
     state = observable({

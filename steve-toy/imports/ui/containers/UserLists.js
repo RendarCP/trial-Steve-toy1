@@ -1,4 +1,3 @@
-import { withTracker } from 'meteor/react-meteor-data';
 import UserLists from '../components/UserLists';
 
 export default withTracker(() => {

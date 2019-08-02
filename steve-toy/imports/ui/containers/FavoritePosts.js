@@ -1,4 +1,3 @@
-import { withTracker } from 'meteor/react-meteor-data';
 import PostCardLists from '../components/PostCardLists';
 import Posts from '../../api/post/post';
 

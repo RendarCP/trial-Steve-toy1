@@ -1,9 +1,5 @@
-import React,{Component} from 'react';
 import { Input } from 'semantic-ui-react';
 import UserList from '../components/UserList';
-
-import { observable } from 'mobx';
-import { observer } from 'mobx-react';
 
 export default observer(class UserLists extends Component {
   state = observable({

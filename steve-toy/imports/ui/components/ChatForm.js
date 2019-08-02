@@ -1,10 +1,6 @@
-import React, { Component } from 'react';
-
 import Profile from './Profile';
 import Chat from '../containers/Chat';
 import UserLists from '../containers/UserLists';
-import { observable } from 'mobx';
-import { observer } from 'mobx-react';
 
 class ChatForm extends Component {
   state = observable({

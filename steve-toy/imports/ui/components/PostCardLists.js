@@ -1,5 +1,4 @@
-import React from 'react';
-import CardView from './CardView.js';
+import CardView from './CardView';
 import { Container, Card } from 'semantic-ui-react';
 
 export default function PostCardLists(props){

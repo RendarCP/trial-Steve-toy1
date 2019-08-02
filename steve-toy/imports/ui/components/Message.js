@@ -1,4 +1,3 @@
-import React from 'react';
 import { List,Label } from 'semantic-ui-react';
 import { Meteor } from 'meteor/meteor';
 

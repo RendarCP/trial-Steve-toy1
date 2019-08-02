@@ -1,10 +1,6 @@
-import React, { Component } from 'react';
 import { Input,List, Button, Form } from 'semantic-ui-react';
 import { Meteor } from 'meteor/meteor';
 import Message from '../components/Message';
-
-import { observable } from 'mobx';
-import { observer } from 'mobx-react';
 
 export default observer(class Chat extends Component {
   state = observable({

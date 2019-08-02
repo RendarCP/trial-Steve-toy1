@@ -1,10 +1,6 @@
-import React, { Component } from 'react';
 import { Container, Header, TextArea, Form, Button, Icon } from 'semantic-ui-react';
 import { Meteor } from 'meteor/meteor';
 import 'moment';
-
-import { observable } from 'mobx';
-import { observer } from 'mobx-react';
 
 import PostComment from './PostComment';
 

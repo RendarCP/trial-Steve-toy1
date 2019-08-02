@@ -1,4 +1,3 @@
-import { withTracker } from 'meteor/react-meteor-data';
 import PostDetail from '../components/PostDetail';
 import Comments from '../../api/comment/comment';
 

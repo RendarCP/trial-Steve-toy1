@@ -1,7 +1,5 @@
-import React from 'react';
 import { Card, Icon } from 'semantic-ui-react';
-import CommentCount from './CommentCount.js';
-
+import CommentCount from './CommentCount';
 
 export default function CardView(props){
   const { isLoggedIn, _id, title, description, favorite } = props;
