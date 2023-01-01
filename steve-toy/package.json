@@ -30,7 +30,7 @@
     "@craco/craco": "^5.2.3",
     "@fortawesome/fontawesome-free": "^5.9.0",
     "chai": "^4.2.0",
-    "craco-less": "^1.9.0",
+    "craco-less": "^1.20.0",
     "semantic-ui-less": "^2.4.1"
   }
 }
